@@ -1,0 +1,118 @@
+.card {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px 8px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-height: 76px;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+  border-color: var(--gray-300);
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.lockIcon { color: var(--momo-pink); }
+
+.topic {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray-800);
+  line-height: 1.3;
+  flex: 1;
+}
+
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.time {
+  font-size: 10px;
+  color: var(--gray-400);
+  font-weight: 600;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.status_draft     { background: var(--gray-300); }
+.status_scheduled { background: var(--yellow); }
+.status_published { background: var(--green); }
+
+.strip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.strip_draft     { background: var(--gray-200); }
+.strip_scheduled { background: var(--yellow); }
+.strip_published { background: var(--green); }
+
+.signals {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.signalChip {
+  font-size: 10px;
+  line-height: 1;
+}
+
+.trendTag {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--momo-pink);
+  background: var(--pink-50);
+  border: 1px solid var(--pink-100);
+  border-radius: var(--radius-full);
+  padding: 1px 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  cursor: default;
+}
+
+.hoverTip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  z-index: 200;
+  background: var(--gray-900);
+  color: white;
+  font-size: 10px;
+  line-height: 1.5;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: var(--shadow-md);
+  max-width: 280px;
+  white-space: normal;
+}

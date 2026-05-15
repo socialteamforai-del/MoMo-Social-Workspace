@@ -1,0 +1,66 @@
+.card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.inner {
+  padding: var(--space-5);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 180px 1fr 130px;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.topicName {
+  font-size: var(--text-sm);
+  color: var(--gray-700);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.barWrap {
+  height: 8px;
+  background: var(--gray-100);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.count {
+  font-size: var(--text-xs);
+  color: var(--gray-400);
+}
+
+.er {
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+
+.note {
+  margin-top: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--gray-400);
+}

@@ -1,0 +1,203 @@
+.topbar {
+  height: var(--topbar-height);
+  background: white;
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-6);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.logoMomo {
+  font-size: var(--text-md);
+  font-weight: 700;
+  color: var(--momo-pink);
+  letter-spacing: -0.3px;
+}
+
+.logoSub {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--gray-200);
+}
+
+.pageSelector {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pageSelect {
+  appearance: none;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 5px 28px 5px 10px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--gray-900);
+  background: white;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pageSelect:focus {
+  border-color: var(--momo-pink);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(165, 0, 100, 0.08);
+}
+
+.chevron {
+  position: absolute;
+  right: 8px;
+  color: var(--gray-400);
+  pointer-events: none;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.alertBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--yellow-light);
+  color: #9A7000;
+  transition: var(--transition);
+}
+
+.alertBtn:hover {
+  background: var(--yellow);
+  color: white;
+}
+
+.badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--red);
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--momo-pink);
+  color: white;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1.5px solid var(--gray-200);
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.iconBtn:hover { background: var(--gray-50); color: var(--gray-800); border-color: var(--gray-300); }
+.iconBtnActive { background: var(--pink-50); color: var(--momo-pink); border-color: var(--momo-pink); }
+
+/* ── Settings slide-in panel ── */
+.settingsOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0,0,0,0.18);
+}
+
+.settingsPanel {
+  position: absolute;
+  top: var(--topbar-height, 56px);
+  right: var(--space-4);
+  width: 720px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 80px);
+  background: white;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.16);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.settingsPanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--gray-200);
+  background: var(--gray-50);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--gray-700);
+  flex-shrink: 0;
+}
+
+.settingsClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-400);
+}
+.settingsClose:hover { background: var(--gray-100); color: var(--gray-700); }
+
+.settingsPanelBody {
+  overflow-y: auto;
+  flex: 1;
+}

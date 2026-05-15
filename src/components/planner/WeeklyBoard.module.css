@@ -1,0 +1,124 @@
+.wrap {
+  padding: var(--space-4);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.weekNav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.weekLabel {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--gray-700);
+  min-width: 130px;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.gridWrapper {
+  overflow-x: auto;
+}
+
+.grid {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 700px;
+  table-layout: fixed;
+}
+
+.cornerCell {
+  width: 52px;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.dayHead {
+  border-bottom: 1px solid var(--gray-200);
+  padding: var(--space-2) var(--space-2) var(--space-3);
+  text-align: center;
+}
+
+.dayName {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--gray-700);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.dayDate {
+  display: block;
+  font-size: 11px;
+  color: var(--gray-400);
+  margin-top: 1px;
+}
+
+.hourCell {
+  font-size: var(--text-xs);
+  color: var(--gray-400);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-2);
+  vertical-align: top;
+  border-right: 1px solid var(--gray-100);
+  white-space: nowrap;
+  width: 52px;
+}
+
+.slotCell {
+  vertical-align: top;
+  padding: 4px;
+  border-bottom: 1px solid var(--gray-100);
+  border-right: 1px solid var(--gray-100);
+  min-height: 70px;
+}
+
+.addBtn {
+  display: none;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 5px;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  color: var(--gray-300);
+  border: 1.5px dashed var(--gray-200);
+  background: transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  min-height: 54px;
+}
+
+.slotCell:hover .addBtn {
+  display: flex;
+}
+
+.addBtn:hover {
+  color: var(--momo-pink);
+  border-color: var(--momo-pink);
+  background: var(--pink-50);
+}
+
+.empty {
+  text-align: center;
+  padding: var(--space-6);
+  color: var(--gray-400);
+  font-size: var(--text-sm);
+}

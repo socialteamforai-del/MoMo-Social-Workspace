@@ -1,0 +1,193 @@
+.benchmarkNote {
+  font-size: var(--text-xs);
+  color: var(--gray-500);
+  margin-bottom: var(--space-2);
+}
+
+.benchmarkSrc {
+  color: var(--gray-400);
+  font-style: italic;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.card {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Colored top accent bar */
+.accentBar {
+  height: 4px;
+  width: 100%;
+}
+.accentBar.good   { background: linear-gradient(90deg, var(--green), var(--green-mid)); }
+.accentBar.avg    { background: linear-gradient(90deg, var(--yellow), #F6C315cc); }
+.accentBar.poor   { background: linear-gradient(90deg, var(--red), #E5303F99); }
+.accentBar.neutral { background: linear-gradient(90deg, var(--momo-pink), var(--pink-300)); }
+
+.inner {
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.iconCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.iconCircle.good   { background: var(--green-light); color: var(--green); }
+.iconCircle.avg    { background: var(--yellow-light); color: #9A7000; }
+.iconCircle.poor   { background: var(--red-light); color: var(--red); }
+.iconCircle.neutral { background: var(--pink-50); color: var(--momo-pink); }
+
+.infoBtn {
+  position: relative;
+  color: var(--gray-300);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.infoBtn:hover {
+  color: var(--gray-500);
+  background: var(--gray-100);
+}
+
+.tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--gray-900);
+  color: white;
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  width: 240px;
+  z-index: 200;
+  box-shadow: var(--shadow-lg);
+  font-weight: 400;
+  white-space: normal;
+}
+
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.value {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--gray-900);
+  line-height: 1;
+  letter-spacing: -0.5px;
+}
+
+.trendChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+.trendUp   { background: var(--green-light); color: var(--green); }
+.trendDown { background: var(--red-light); color: var(--red); }
+.trendFlat { background: var(--gray-100); color: var(--gray-500); }
+
+.label {
+  font-size: var(--text-sm);
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+/* Benchmark progress bar */
+.benchmarkRow {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.benchmarkLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: var(--gray-400);
+}
+
+.benchmarkBar {
+  height: 5px;
+  background: var(--gray-100);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.benchmarkFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s ease;
+}
+.benchmarkFill.good  { background: linear-gradient(90deg, var(--green-mid), var(--green)); }
+.benchmarkFill.avg   { background: linear-gradient(90deg, var(--yellow), #E6A800); }
+.benchmarkFill.poor  { background: linear-gradient(90deg, var(--red-light), var(--red)); }
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--gray-100);
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+.statusBadge.good  { background: var(--green-light); color: var(--green); }
+.statusBadge.avg   { background: var(--yellow-light); color: #9A7000; }
+.statusBadge.poor  { background: var(--red-light); color: var(--red); }
+
+.delta {
+  font-size: var(--text-xs);
+  color: var(--gray-400);
+  margin-left: auto;
+}

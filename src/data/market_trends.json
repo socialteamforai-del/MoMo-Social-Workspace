@@ -1,0 +1,38 @@
+[
+  {
+    "trend_date": "2026-04-21",
+    "trend_topic": "Chứng khoán Mỹ biến động sau thuế quan",
+    "trend_type": "medium-term",
+    "source": "manual",
+    "trend_strength": 0.8,
+    "expiry_window_days": 14,
+    "recommended_format": "market_update",
+    "recommended_angle": "So sánh tác động VN-Index vs US market",
+    "status": "active",
+    "page_id": "mama_tai_chinh"
+  },
+  {
+    "trend_date": "2026-04-21",
+    "trend_topic": "Mùa báo cáo tài chính Q1/2026",
+    "trend_type": "medium-term",
+    "source": "manual",
+    "trend_strength": 0.75,
+    "expiry_window_days": 21,
+    "recommended_format": "educational_post",
+    "recommended_angle": "Hướng dẫn đọc BCTC cho nhà đầu tư cá nhân",
+    "status": "active",
+    "page_id": "mama_tai_chinh"
+  },
+  {
+    "trend_date": "2026-04-21",
+    "trend_topic": "VN-Index vượt 1.300 điểm",
+    "trend_type": "short-term",
+    "source": "manual",
+    "trend_strength": 0.9,
+    "expiry_window_days": 5,
+    "recommended_format": "poll",
+    "recommended_angle": "Dự đoán xu hướng tuần tới",
+    "status": "active",
+    "page_id": "mama_tai_chinh"
+  }
+]
