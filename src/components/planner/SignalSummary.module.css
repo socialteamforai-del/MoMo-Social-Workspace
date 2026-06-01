@@ -1,3 +1,166 @@
+/* ── Signal summary (compact data bar) ── */
+.signalContainer {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: white;
+}
+
+.signalTrigger {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: 7px var(--space-4);
+  background: var(--gray-50);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  text-align: left;
+  transition: background 0.15s;
+}
+.signalTrigger:hover { background: var(--gray-100); }
+
+.signalLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.signalStats {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.signalStat {
+  font-size: 11px;
+  padding: 2px 7px;
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-full);
+  color: var(--gray-500);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.signalStatKey {
+  font-size: 11px;
+  padding: 2px 7px;
+  background: white;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-full);
+  color: var(--gray-700);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.signalChevron { color: var(--gray-400); flex-shrink: 0; }
+
+/* ── Detail panel ── */
+.signalDetail {
+  display: flex;
+  border-top: 1px solid var(--gray-100);
+  background: white;
+}
+@media (max-width: 900px) { .signalDetail { flex-direction: column; } }
+
+.signalSection {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  border-right: 1px solid var(--gray-100);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.signalSection:last-child { border-right: none; }
+
+.signalSectionLabel {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.signalRows {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.signalRow {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.signalRank {
+  font-size: 9px;
+  font-weight: 800;
+  background: var(--momo-pink);
+  color: white;
+  border-radius: 3px;
+  padding: 1px 4px;
+  flex-shrink: 0;
+}
+
+.signalName {
+  font-size: 12px;
+  color: var(--gray-700);
+  font-weight: 500;
+}
+
+.signalVal {
+  font-size: 11px;
+  color: var(--gray-400);
+  font-weight: 400;
+}
+
+/* ── TrendManager inline variant (inside InputPanel tab) ── */
+.trendInlineHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-3);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.trendInlineTitle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.trendInlineBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  background: white;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.trendInlineBtn:hover:not(:disabled) { border-color: var(--momo-pink); color: var(--momo-pink); }
+.trendInlineBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
 .row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -156,6 +319,82 @@
   border-top: 1px solid var(--gray-200);
 }
 
+/* ── Modal mode toggle ── */
+.modalModeToggle {
+  display: flex;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  align-self: flex-start;
+}
+.modalModeBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border: none;
+  background: transparent;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-family: var(--font-sans);
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.modalModeBtn:hover { background: var(--gray-100); color: var(--gray-700); }
+.modalModeBtnActive { background: var(--momo-pink); color: white; }
+.modalModeBtnActive:hover { background: #8A0054; }
+
+/* ── Modal textarea / input ── */
+.modalTextarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-family: var(--font-sans);
+  color: var(--gray-900);
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+.modalTextarea:focus { border-color: var(--momo-pink); box-shadow: 0 0 0 3px rgba(165,0,100,0.08); }
+.modalTextarea::placeholder { color: var(--gray-300); font-style: italic; }
+
+.modalInput {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-family: var(--font-sans);
+  color: var(--gray-900);
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+.modalInput:focus { border-color: var(--momo-pink); box-shadow: 0 0 0 3px rgba(165,0,100,0.08); }
+
+.modalParsedResult {
+  padding: 10px 14px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.modalParsedTopic {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--gray-900);
+}
+.modalParsedAngle {
+  font-size: var(--text-xs);
+  color: var(--gray-500);
+}
+
 /* ── Hot topics panel ── */
 .hotPanel {
   border-bottom: 1px solid var(--pink-100);
@@ -249,6 +488,89 @@
   transition: var(--transition);
 }
 .hotAdd:hover { background: #8A0054; }
+
+.hotItemPicked { opacity: 0.7; }
+
+.hotPicked {
+  font-size: 11px;
+  font-weight: 800;
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.hotRemove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 3px;
+  transition: var(--transition);
+}
+.hotRemove:hover { background: #fee2e2; color: #b91c1c; }
+
+/* ── Picked trends list (inline InputPanel variant) ── */
+.pickedList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: var(--space-2);
+}
+
+.pickedItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 6px 10px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-sm);
+}
+
+.pickedInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.pickedName {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.pickedAngle {
+  font-size: 11px;
+  color: var(--gray-400);
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pickedRemove {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--gray-400);
+  background: none;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.pickedRemove:hover { border-color: #fca5a5; color: #b91c1c; background: #fff5f5; }
 
 /* Age label */
 .hotAge {

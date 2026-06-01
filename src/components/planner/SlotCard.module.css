@@ -2,17 +2,18 @@
   background: white;
   border: 1px solid var(--gray-200);
   border-radius: var(--radius-sm);
-  padding: 6px 8px 8px;
+  padding: 7px 8px 9px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: box-shadow var(--transition), transform var(--transition);
+  transition: box-shadow var(--transition), transform var(--transition), opacity var(--transition);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  min-height: 76px;
+  gap: 3px;
+  min-height: 72px;
   width: 100%;
   margin-bottom: 4px;
+  user-select: none;
 }
 
 .card:hover {
@@ -21,21 +22,37 @@
   border-color: var(--gray-300);
 }
 
+.dragging {
+  opacity: 0.4;
+  transform: scale(0.96);
+  box-shadow: none;
+}
+
 .topRow {
   display: flex;
   align-items: center;
   gap: 4px;
-  flex-wrap: wrap;
 }
 
-.lockIcon { color: var(--momo-pink); }
+.lockIcon {
+  color: var(--gray-300);
+  flex-shrink: 0;
+}
 
 .topic {
   font-size: 11px;
   font-weight: 600;
   color: var(--gray-800);
   line-height: 1.3;
-  flex: 1;
+  margin-top: 1px;
+}
+
+.title {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--gray-500);
+  line-height: 1.3;
+  font-style: italic;
 }
 
 .bottomRow {
@@ -43,6 +60,7 @@
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
+  padding-top: 3px;
 }
 
 .time {
@@ -55,12 +73,76 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
+  background: var(--gray-300);
+  flex-shrink: 0;
 }
 
-.status_draft     { background: var(--gray-300); }
-.status_scheduled { background: var(--yellow); }
-.status_published { background: var(--green); }
+/* Scheduled & published badge pills */
+.scheduledBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: var(--radius-full);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #16a34a;
+  white-space: nowrap;
+  line-height: 1.4;
+}
 
+.publishedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  background: #eff6ff;
+  border: 1px solid #93c5fd;
+  border-radius: var(--radius-full);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #2563eb;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+/* Card-level state styling */
+.cardScheduled {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+.cardScheduled:hover { border-color: #4ade80; }
+
+.cardPublished {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+.cardPublished:hover { border-color: #60a5fa; }
+
+/* Trending pill — text only, no emoji */
+.trendPill {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--momo-pink);
+  background: var(--pink-50);
+  border: 1px solid var(--pink-100);
+  border-radius: var(--radius-pill);
+  padding: 1px 6px;
+  letter-spacing: 0.2px;
+  flex-shrink: 0;
+}
+
+.postId {
+  font-size: 9px;
+  color: var(--gray-400);
+  font-weight: 500;
+  margin-top: 1px;
+  letter-spacing: 0.2px;
+}
+
+/* Status strip at bottom edge */
 .strip {
   position: absolute;
   bottom: 0;
@@ -69,50 +151,6 @@
   height: 3px;
 }
 
-.strip_draft     { background: var(--gray-200); }
-.strip_scheduled { background: var(--yellow); }
-.strip_published { background: var(--green); }
-
-.signals {
-  display: flex;
-  gap: 3px;
-  flex-wrap: wrap;
-}
-
-.signalChip {
-  font-size: 10px;
-  line-height: 1;
-}
-
-.trendTag {
-  font-size: 9px;
-  font-weight: 600;
-  color: var(--momo-pink);
-  background: var(--pink-50);
-  border: 1px solid var(--pink-100);
-  border-radius: var(--radius-full);
-  padding: 1px 6px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  cursor: default;
-}
-
-.hoverTip {
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 0;
-  z-index: 200;
-  background: var(--gray-900);
-  color: white;
-  font-size: 10px;
-  line-height: 1.5;
-  padding: 6px 8px;
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-  pointer-events: none;
-  box-shadow: var(--shadow-md);
-  max-width: 280px;
-  white-space: normal;
-}
+.strip_draft     { background: var(--gray-100); }
+.strip_scheduled { background: #4ade80; }
+.strip_published { background: #60a5fa; }

@@ -4,31 +4,42 @@ import styles from './MomoDataTab.module.css'
 
 const PREVIEW_ROWS = 5
 
-const today = new Date().toISOString().split('T')[0]
-const thirtyDaysAgo = new Date(Date.now() - 30 * 864e5).toISOString().split('T')[0]
+const today        = new Date().toISOString().split('T')[0]
+const daysAgo = n  => new Date(Date.now() - n * 864e5).toISOString().split('T')[0]
+
+const PRESETS = [
+  { label: '7 ngày',  days: 7   },
+  { label: '30 ngày', days: 30  },
+  { label: '90 ngày', days: 90  },
+  { label: '6 tháng', days: 180 },
+  { label: 'Tuỳ chọn', days: null },
+]
 
 // Persist data across tab switches (module-level — survives unmount)
-let _cache = { rows: [], refreshTime: '', isCached: false, searched: false, startDate: thirtyDaysAgo, endDate: today, pageFilter: '', pageOptions: [] }
+let _cache = {
+  rows: [], refreshTime: '', isCached: false, searched: false,
+  startDate: daysAgo(30), endDate: today, pageId: '', pageOptions: [],
+  preset: 30,
+}
 
-// Export for DataSourceSelector to use cached MCP rows
 export function getMomoDataCache() { return _cache }
 
 const MEASURES = [
-  { key: 'feed_agg_user_engagement.view_users',      label: 'View Users',       type: 'num' },
-  { key: 'feed_agg_user_engagement.engaged_users',   label: 'Engaged Users',    type: 'num' },
-  { key: 'feed_agg_user_engagement.interact_users',  label: 'Interact Users',   type: 'num' },
-  { key: 'feed_agg_user_engagement.like_users',      label: 'Like Users',       type: 'num' },
-  { key: 'feed_agg_user_engagement.comment_users',   label: 'Comment Users',    type: 'num' },
-  { key: 'feed_agg_user_engagement.share_users',     label: 'Share Users',      type: 'num' },
-  { key: 'feed_agg_user_engagement.click_cta_users', label: 'CTA Users',        type: 'num' },
-  { key: 'feed_agg_user_engagement.view_count',      label: 'Views',            type: 'num' },
-  { key: 'feed_agg_user_engagement.like_count',      label: 'Likes',            type: 'num' },
-  { key: 'feed_agg_user_engagement.comment_count',   label: 'Comments',         type: 'num' },
-  { key: 'feed_agg_user_engagement.share_count',     label: 'Shares',           type: 'num' },
-  { key: 'feed_agg_user_engagement.click_cta_count', label: 'CTA Clicks',       type: 'num' },
-  { key: 'feed_agg_user_engagement.click_poll_count',label: 'Poll Clicks',      type: 'num' },
-  { key: 'feed_agg_user_engagement.er_user',         label: 'ER User',          type: 'pct' },
-  { key: 'feed_agg_user_engagement.ctr_user',        label: 'CTR User',         type: 'pct' },
+  { key: 'feed_agg_user_engagement.view_users',      label: 'View Users',  type: 'num' },
+  { key: 'feed_agg_user_engagement.engaged_users',   label: 'Engaged',     type: 'num' },
+  { key: 'feed_agg_user_engagement.interact_users',  label: 'Interact',    type: 'num' },
+  { key: 'feed_agg_user_engagement.like_users',      label: 'Like',        type: 'num' },
+  { key: 'feed_agg_user_engagement.comment_users',   label: 'Comment',     type: 'num' },
+  { key: 'feed_agg_user_engagement.share_users',     label: 'Share',       type: 'num' },
+  { key: 'feed_agg_user_engagement.click_cta_users', label: 'CTA',         type: 'num' },
+  { key: 'feed_agg_user_engagement.view_count',      label: 'Views',       type: 'num' },
+  { key: 'feed_agg_user_engagement.like_count',      label: 'Likes',       type: 'num' },
+  { key: 'feed_agg_user_engagement.comment_count',   label: 'Comments',    type: 'num' },
+  { key: 'feed_agg_user_engagement.share_count',     label: 'Shares',      type: 'num' },
+  { key: 'feed_agg_user_engagement.click_cta_count', label: 'CTA Clicks',  type: 'num' },
+  { key: 'feed_agg_user_engagement.click_poll_count',label: 'Poll Clicks', type: 'num' },
+  { key: 'feed_agg_user_engagement.er_user',         label: 'ER',          type: 'pct' },
+  { key: 'feed_agg_user_engagement.ctr_user',        label: 'CTR',         type: 'pct' },
 ]
 
 function fmt(val, type) {
@@ -38,11 +49,11 @@ function fmt(val, type) {
 }
 
 export default function MomoDataTab() {
-  const { setOverridePosts, contentRows, contentFileName } = useApp()
-  const [applyStatus, setApplyStatus] = useState(null)
+  const { setOverridePosts, contentRows, contentFileName, pageConfig } = useApp()
+
+  const [preset, setPreset]         = useState(_cache.preset ?? 30)
   const [startDate, setStartDate]   = useState(_cache.startDate)
   const [endDate, setEndDate]       = useState(_cache.endDate)
-  const [pageFilter, setPageFilter] = useState(_cache.pageFilter)
   const [rows, setRows]             = useState(_cache.rows)
   const [refreshTime, setRefreshTime] = useState(_cache.refreshTime)
   const [isCached, setIsCached]     = useState(_cache.isCached)
@@ -50,8 +61,9 @@ export default function MomoDataTab() {
   const [error, setError]           = useState('')
   const [searched, setSearched]     = useState(_cache.searched)
   const [showAll, setShowAll]       = useState(false)
+  const [applyStatus, setApplyStatus] = useState(null)
+  const didAutoFetch                = useRef(false)
 
-  // Build content lookup from context (uploaded via DataSourceSelector)
   const contentMap = useMemo(() => {
     if (!contentRows?.length) return null
     const map = new Map()
@@ -61,41 +73,17 @@ export default function MomoDataTab() {
     return map.size ? map : null
   }, [contentRows])
 
-  // Page name dropdown
-  const [pageOptions, setPageOptions]   = useState(_cache.pageOptions)
-  const [showPageDrop, setShowPageDrop] = useState(false)
-  const [pageSearch, setPageSearch]     = useState('')
-  const [loadingPages, setLoadingPages] = useState(false)
-  const dropRef = useRef(null)
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handler = (e) => { if (dropRef.current && !dropRef.current.contains(e.target)) setShowPageDrop(false) }
-    document.addEventListener('mousedown', handler)
-    return () => document.removeEventListener('mousedown', handler)
-  }, [])
-
-  const loadPageOptions = useCallback(async () => {
-    if (_cache.pageOptions.length) { setPageOptions(_cache.pageOptions); return }
-    setLoadingPages(true)
-    try {
-      const end   = new Date().toISOString().split('T')[0]
-      const start = new Date(Date.now() - 90 * 864e5).toISOString().split('T')[0]
-      const res  = await fetch('/api/momo-data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ startDate: start, endDate: end, limit: 500 }),
-      })
-      const json = await res.json()
-      const names = [...new Set((json.rows ?? [])
-        .map(r => r['feed_agg_user_engagement.page_name'])
-        .filter(Boolean)
-      )].sort()
-      setPageOptions(names)
-      _cache.pageOptions = names
-    } catch {}
-    finally { setLoadingPages(false) }
-  }, [])
+  const handlePreset = (days) => {
+    setPreset(days)
+    if (days !== null) {
+      const s = daysAgo(days)
+      setStartDate(s)
+      setEndDate(today)
+      _cache.startDate = s
+      _cache.endDate   = today
+    }
+    _cache.preset = days
+  }
 
   const fetchData = useCallback(async () => {
     setLoading(true)
@@ -104,51 +92,51 @@ export default function MomoDataTab() {
       const res = await fetch('/api/momo-data', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ startDate, endDate, limit: 500 }),
+        body: JSON.stringify({ startDate, endDate, limit: 500, mcpPageId: pageConfig?.mcp_page_id }),
       })
       const json = await res.json()
       if (json.error) throw new Error(json.error)
-      // Update page options from fresh data
-      const freshNames = [...new Set((json.rows ?? [])
-        .map(r => r['feed_agg_user_engagement.page_name']).filter(Boolean)
-      )].sort()
-      if (freshNames.length) { setPageOptions(freshNames); _cache.pageOptions = freshNames }
-      // Filter client-side by page name
-      const keyword = pageFilter.trim().toLowerCase()
-      const filtered = keyword
-        ? json.rows.filter(r => (r['feed_agg_user_engagement.page_name'] ?? '').toLowerCase().includes(keyword))
-        : json.rows
-      setRows(filtered)
+
+      // Server already filters by mcp_page_id — no client-side page filter needed
+      const rows = json.rows ?? []
+      setRows(rows)
       setRefreshTime(json.refreshTime)
       setIsCached(!!json.cached)
       setSearched(true)
-      _cache = { ..._cache, rows: filtered, refreshTime: json.refreshTime, isCached: !!json.cached, searched: true, startDate, endDate, pageFilter }
+      _cache = { ..._cache, rows, refreshTime: json.refreshTime, isCached: !!json.cached, searched: true, startDate, endDate, pageId: pageConfig?.mcp_page_id ?? '' }
     } catch (e) {
       setError(e.message)
     } finally {
       setLoading(false)
     }
-  }, [startDate, endDate, pageFilter])
+  }, [startDate, endDate])
+
+  // Auto-fetch on first mount if no cached data
+  useEffect(() => {
+    if (!didAutoFetch.current && !_cache.searched) {
+      didAutoFetch.current = true
+      fetchData()
+    }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const applyToOverview = useCallback(() => {
     if (!rows.length) return
     let matchedCount = 0
     const normalized = rows.map(r => {
-      const pid = r['feed_agg_user_engagement.post_id'] ?? ''
+      const pid     = r['feed_agg_user_engagement.post_id'] ?? ''
       const content = contentMap?.get(String(pid))
       if (content) matchedCount++
       return {
-        post_id:       pid,
-        page_name:     r['feed_agg_user_engagement.page_name'] ?? '',
-        er_user:       parseFloat(r['feed_agg_user_engagement.er_user'])    || 0,
-        ctr_user:      parseFloat(r['feed_agg_user_engagement.ctr_user'])   || 0,
-        view_users:    parseInt(r['feed_agg_user_engagement.view_users'])   || 0,
-        view_count:    parseInt(r['feed_agg_user_engagement.view_count'])   || 0,
-        like_users:    parseInt(r['feed_agg_user_engagement.like_users'])   || 0,
-        comment_users: parseInt(r['feed_agg_user_engagement.comment_users'])|| 0,
-        share_users:   parseInt(r['feed_agg_user_engagement.share_users'])  || 0,
-        engaged_users: parseInt(r['feed_agg_user_engagement.engaged_users'])|| 0,
-        // Use content from uploaded file if available, else placeholders
+        post_id:        pid,
+        page_name:      r['feed_agg_user_engagement.page_name'] ?? '',
+        er_user:        parseFloat(r['feed_agg_user_engagement.er_user'])    || 0,
+        ctr_user:       parseFloat(r['feed_agg_user_engagement.ctr_user'])   || 0,
+        view_users:     parseInt(r['feed_agg_user_engagement.view_users'])   || 0,
+        view_count:     parseInt(r['feed_agg_user_engagement.view_count'])   || 0,
+        like_users:     parseInt(r['feed_agg_user_engagement.like_users'])   || 0,
+        comment_users:  parseInt(r['feed_agg_user_engagement.comment_users'])|| 0,
+        share_users:    parseInt(r['feed_agg_user_engagement.share_users'])  || 0,
+        engaged_users:  parseInt(r['feed_agg_user_engagement.engaged_users'])|| 0,
         topic_group:    content?.topic_group    ?? '',
         content_format: content?.content_format ?? '',
         post_content:   content?.post_content   ?? '',
@@ -156,91 +144,146 @@ export default function MomoDataTab() {
         created_hour:   content?.created_hour   ?? 12,
         day_of_week:    content?.day_of_week    ?? 'Monday',
         has_reward:     content?.has_reward     ?? false,
-        view_anomaly: false,
+        view_anomaly:   false,
         bp_comment_count: 0,
       }
     })
     setOverridePosts(normalized)
-    if (contentMap && matchedCount > 0) {
-      const missed = normalized.length - matchedCount
-      setApplyStatus(
-        `Đã áp dụng ${normalized.length} bài vào Overview · ghép content từ ${contentFileName || 'file'}: ${matchedCount} matched` +
-        (missed > 0 ? ` · ${missed} bài thiếu content` : '') + '.'
-      )
-    } else {
-      setApplyStatus(`Đã áp dụng ${normalized.length} bài vào Overview. Lưu ý: chưa có file content — biểu đồ topic/format sẽ trống, chỉ KPI cards là chính xác.`)
-    }
+    const missed = normalized.length - matchedCount
+    setApplyStatus(
+      contentMap && matchedCount > 0
+        ? `Đã áp dụng ${normalized.length} bài · ghép content: ${matchedCount} matched` + (missed > 0 ? ` · ${missed} thiếu content` : '')
+        : `Đã áp dụng ${normalized.length} bài. Chưa có file content — biểu đồ topic/format sẽ trống.`
+    )
     setTimeout(() => setApplyStatus(null), 6000)
   }, [rows, startDate, setOverridePosts, contentMap, contentFileName])
 
+  const activePresetLabel = PRESETS.find(p => p.days === preset)?.label ?? 'Tuỳ chọn'
+
   return (
     <div className={styles.container}>
+
+      {/* ── Header ── */}
       <div className={styles.header}>
-        <h1 className={styles.title}>MoMo Feed Analytics</h1>
-        <p className={styles.subtitle}>
-          Cube: <span>feed_agg_user_engagement</span> · Filter: <span>Fanpage post</span>
-        </p>
+        <div className={styles.headerTop}>
+          <div>
+            <h1 className={styles.title}>MoMo Feed Analytics</h1>
+            <p className={styles.subtitle}>
+              Cube: <span>feed_agg_user_engagement</span> · Filter: <span>Fanpage post</span>
+            </p>
+          </div>
+          {/* Page lock badge */}
+          <div className={styles.pageLockBadge}>
+            <span className={styles.pageLockDot} />
+            <span className={styles.pageLockName}>{pageConfig?.page_name}</span>
+            <span className={styles.pageLockHint}>🔒 từ tài khoản</span>
+          </div>
+        </div>
       </div>
 
-      <div className={styles.toolbar}>
-        <div className={styles.dateGroup}>
-          <label className={styles.label}>Từ ngày</label>
-          <input type="date" className={styles.dateInput} value={startDate} max={endDate}
-            onChange={e => { setStartDate(e.target.value); _cache.startDate = e.target.value }} />
-        </div>
-        <div className={styles.dateGroup}>
-          <label className={styles.label}>Đến ngày</label>
-          <input type="date" className={styles.dateInput} value={endDate} min={startDate} max={today}
-            onChange={e => { setEndDate(e.target.value); _cache.endDate = e.target.value }} />
-        </div>
-        <div className={styles.dateGroup} style={{ flex: 1 }}>
-          <label className={styles.label}>Lọc theo Page Name</label>
-          <input
-            type="text"
-            list="page-options-list"
-            className={styles.dateInput}
-            placeholder="Tất cả page (hoặc gõ tên page)"
-            value={pageFilter}
-            onChange={e => { setPageFilter(e.target.value); _cache.pageFilter = e.target.value }}
-            onFocus={() => { if (!pageOptions.length) loadPageOptions() }}
-          />
-          <datalist id="page-options-list">
-            {pageOptions.map(name => <option key={name} value={name} />)}
-          </datalist>
-        </div>
-        <div className={styles.btnGroup}>
-          <button className={styles.btn} onClick={fetchData} disabled={loading}>
-            {loading ? 'Đang tải…' : 'Lấy dữ liệu'}
-          </button>
-          {rows.length > 0 && (
-            <button className={styles.applyBtn} onClick={applyToOverview} title="Đẩy kết quả đang hiển thị vào tab Overview để phân tích KPI">
-              ↗ Áp dụng {rows.length} bài → Overview
+      {/* ── Step 1: Timeframe ── */}
+      <div className={styles.filterCard}>
+        <p className={styles.stepLabel}><span className={styles.stepNum}>1</span> Chọn thời gian</p>
+
+        <div className={styles.presetRow}>
+          {PRESETS.map(p => (
+            <button
+              key={p.label}
+              className={`${styles.presetChip} ${preset === p.days ? styles.presetActive : ''}`}
+              onClick={() => handlePreset(p.days)}
+            >
+              {p.label}
             </button>
-          )}
+          ))}
         </div>
-      </div>
 
-      {applyStatus && <div className={styles.applyNote}>{applyStatus}</div>}
+        {/* Custom date pickers — only shown when "Tuỳ chọn" selected */}
+        {preset === null && (
+          <div className={styles.customDates}>
+            <div className={styles.dateGroup}>
+              <label className={styles.dateLabel}>Từ ngày</label>
+              <input
+                type="date"
+                className={styles.dateInput}
+                value={startDate}
+                max={endDate}
+                onChange={e => { setStartDate(e.target.value); _cache.startDate = e.target.value }}
+              />
+            </div>
+            <span className={styles.dateSep}>→</span>
+            <div className={styles.dateGroup}>
+              <label className={styles.dateLabel}>Đến ngày</label>
+              <input
+                type="date"
+                className={styles.dateInput}
+                value={endDate}
+                min={startDate}
+                max={today}
+                onChange={e => { setEndDate(e.target.value); _cache.endDate = e.target.value }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Date range summary */}
+        <p className={styles.rangeSummary}>
+          {startDate} → {endDate}
+          {preset !== null && <> ({activePresetLabel})</>}
+        </p>
+
+        {/* Fetch button */}
+        <button
+          className={styles.fetchBtn}
+          onClick={fetchData}
+          disabled={loading}
+        >
+          {loading
+            ? <><span className={styles.spinner} /> Đang tải dữ liệu…</>
+            : '⬇  Tải dữ liệu'}
+        </button>
+      </div>
 
       {error && <div className={styles.error}>{error}</div>}
 
+      {/* ── Step 2: Result ── */}
       {searched && !loading && (
-        <div className={styles.meta}>
-          <span className={styles.metaBadge}>
-            <strong>{rows.length}</strong> posts
-            {pageFilter && <> · filter: <em>{pageFilter}</em></>}
-            {contentMap && <> · <span style={{ color: 'var(--momo-pink)' }}>đã có content ({contentFileName})</span></>}
-          </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            {isCached && <span className={styles.cached}>⚡ Cached</span>}
-            {refreshTime && <span className={styles.refresh}>Cập nhật: {new Date(refreshTime).toLocaleString('vi-VN')}</span>}
-          </span>
+        <div className={styles.resultCard}>
+          <p className={styles.stepLabel}><span className={styles.stepNum}>2</span> Kết quả</p>
+
+          <div className={styles.resultMeta}>
+            <div className={styles.resultCount}>
+              <span className={styles.resultNum}>{rows.length}</span>
+              <span className={styles.resultSub}>bài · {pageConfig?.page_name}</span>
+            </div>
+            <div className={styles.resultRight}>
+              {isCached && <span className={styles.cached}>⚡ Cached</span>}
+              {refreshTime && (
+                <span className={styles.refresh}>
+                  Cập nhật: {new Date(refreshTime).toLocaleString('vi-VN')}
+                </span>
+              )}
+            </div>
+          </div>
+
+          {contentMap && (
+            <p className={styles.contentNote}>
+              📎 File content đã ghép: <strong>{contentFileName}</strong>
+            </p>
+          )}
+
+          {applyStatus && <div className={styles.applyNote}>{applyStatus}</div>}
+
+          {rows.length > 0 && (
+            <button className={styles.applyBtn} onClick={applyToOverview}>
+              ↗ Áp dụng {rows.length} bài vào Workspace
+            </button>
+          )}
         </div>
       )}
 
+      {/* ── Data table ── */}
       {rows.length > 0 && (() => {
-        const visibleRows = showAll ? rows : rows.slice(0, PREVIEW_ROWS)
-        const hasMore = rows.length > PREVIEW_ROWS
+        const visible = showAll ? rows : rows.slice(0, PREVIEW_ROWS)
         return (
           <>
             <div className={styles.tableWrap}>
@@ -255,8 +298,8 @@ export default function MomoDataTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {visibleRows.map((r, i) => {
-                    const pid = r['feed_agg_user_engagement.post_id'] || ''
+                  {visible.map((r, i) => {
+                    const pid     = r['feed_agg_user_engagement.post_id'] || ''
                     const content = contentMap?.get(String(pid))
                     return (
                       <tr key={i}>
@@ -283,11 +326,12 @@ export default function MomoDataTab() {
                 </tbody>
               </table>
             </div>
-            {hasMore && (
+
+            {rows.length > PREVIEW_ROWS && (
               <button className={styles.toggleBtn} onClick={() => setShowAll(v => !v)}>
                 {showAll
-                  ? `▲ Ẩn bớt (chỉ hiện ${PREVIEW_ROWS} bài đầu)`
-                  : `▼ Xem tất cả ${rows.length} bài (đang ẩn ${rows.length - PREVIEW_ROWS})`}
+                  ? `▲ Thu gọn (chỉ hiện ${PREVIEW_ROWS} bài)`
+                  : `▼ Xem tất cả ${rows.length} bài`}
               </button>
             )}
           </>
@@ -295,7 +339,7 @@ export default function MomoDataTab() {
       })()}
 
       {searched && !loading && rows.length === 0 && !error && (
-        <div className={styles.empty}>Không có dữ liệu cho bộ lọc này.</div>
+        <div className={styles.empty}>Không có dữ liệu cho khoảng thời gian này.</div>
       )}
     </div>
   )

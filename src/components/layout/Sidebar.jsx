@@ -4,9 +4,9 @@ import { useApp } from '../../context/AppContext.jsx'
 import styles from './Sidebar.module.css'
 
 const NAV_ITEMS = [
-  { id: 'overview', label: 'Overview', icon: BarChart2 },
-  { id: 'planner',  label: 'Planner',  icon: Calendar },
-  { id: 'library',  label: 'Library',  icon: BookOpen },
+  { id: 'planner',  label: 'Content Planner', icon: Calendar  },
+  { id: 'overview', label: 'Performance', icon: BarChart2  },
+  { id: 'library',  label: 'Library',     icon: BookOpen  },
 ]
 
 export default function Sidebar() {

@@ -1,0 +1,485 @@
+{
+  "page_id": "mama_tai_chinh",
+  "page_name": "MaMa Tài Chính",
+  "built_at": "2026-05-22T10:33:15.446Z",
+  "note": "Khởi tạo thủ công từ phân tích 68 bài. Dùng 'Rebuild' trong Settings để cập nhật phần data-driven từ data mới.",
+  "voice": {
+    "persona": "MaMa — người chị/người bạn am hiểu tài chính, thân thiện, không phán xét, đồng hành cùng cộng đồng nhà đầu tư cá nhân Việt Nam",
+    "tone": "Thân thiện, ấm áp, gần gũi. Không dùng từ ngữ hàn lâm hay quá technical. Giải thích như kể chuyện cho bạn bè, không như giảng bài trên lớp.",
+    "address_style": "Xưng 'MaMa', gọi độc giả 'bạn'. Dùng 'nhé', 'nha', 'đó' để tạo cảm giác thân mật. Đôi khi dùng 'Cùng MaMa và Cộng đồng...' để tạo cảm giác tập thể.",
+    "vocabulary": {
+      "preferred": [
+        "bạn",
+        "nhé",
+        "nha",
+        "đó",
+        "ngay",
+        "thử ngay",
+        "đơn giản là",
+        "thực ra",
+        "biết đâu",
+        "kèo thơm",
+        "bắt sóng",
+        "dòng tiền",
+        "bứt phá",
+        "phiên giao dịch",
+        "cộng đồng",
+        "chia sẻ ngay",
+        "góc nhìn",
+        "dữ liệu cho thấy"
+      ],
+      "avoid": [
+        "quý khách",
+        "kính thưa",
+        "phải khẳng định rằng",
+        "theo định nghĩa học thuật",
+        "nói một cách học thuật",
+        "chúng tôi xin trân trọng",
+        "kính mong",
+        "được biết"
+      ]
+    },
+    "emoji_style": "Dùng 1 emoji lớn đầu bài làm visual anchor (📊 cho poll, 🧠💡 cho educational). Emoji cảm xúc ở CTA. Tối đa 3–4 emoji per bài — không lạm dụng.",
+    "signature": "MaMa Tài Chính - Trợ Thủ Đắc Lực Đồng Hành Trên Con Đường Quản Lý Tài Chính Của Bạn"
+  },
+  "storytelling": {
+    "primary_framework": "HOOK → CONTEXT ngắn (1–2 câu số liệu/bối cảnh thực) → INSIGHT/ĐIỂM CHÍNH → CTA mở kết thúc câu hỏi",
+    "frameworks": {
+      "HOOK-CONTEXT-CTA": "Hook gây tò mò → Context 1–2 câu → CTA rõ ràng kết câu hỏi mở",
+      "PROBLEM-INSIGHT-SOLUTION": "Vấn đề quen thuộc người dùng hay gặp → Insight bất ngờ từ data/góc nhìn mới → Giải pháp/hành động cụ thể với MoMo",
+      "STORY-LESSON-APPLY": "Câu chuyện/confession ngắn → Bài học rút ra → Áp dụng thực tế ngay trên app MoMo",
+      "DATA-ANGLE-QUESTION": "Con số bất ngờ mở đầu → Giải thích từ góc thị trường → Câu hỏi kêu gọi chia sẻ quan điểm"
+    },
+    "structure_principles": [
+      "Câu ngắn, đoạn ngắn — dễ đọc trên mobile, không quá 2–3 câu/đoạn",
+      "Dùng số liệu cụ thể (%, VNĐ, ngày tháng) — tránh mơ hồ như 'rất nhiều', 'khá cao'",
+      "Kết thúc bằng câu hỏi mở hoặc CTA hành động cụ thể — không để bài 'chết' không có tương tác",
+      "Không hashtag (trừ minigame) — giảm visual noise",
+      "Emoji đầu bài làm visual break — giúp người dùng nhận diện format nhanh khi scroll"
+    ],
+    "series_pattern": {
+      "example": "Chuỗi 'Lớp học Hiểu Tài Chính' đánh số BÀI 1, BÀI 2... — tạo thói quen follow và cảm giác tiến trình"
+    }
+  },
+  "format_patterns": {
+    "poll": {
+      "opener": "📊 [CỤM TỪ CAPS LOCK — đặt vấn đề]: [Chi tiết cổ phiếu/topic]",
+      "structure": "Emoji 📊 + tiêu đề CAPS LOCK → Bối cảnh ngắn (tại sao hôm nay đặc biệt, 1–2 câu) → Câu hỏi bình chọn rõ ràng (TĂNG / GIẢM / KHÔNG ĐỔI) → Hướng dẫn vote → Deadline → Phần thưởng",
+      "avg_length_chars": 600,
+      "emoji_anchors": [
+        "📊",
+        "👉",
+        "👇",
+        "⏰",
+        "📅",
+        "✅❌",
+        "💸"
+      ],
+      "cta_pattern": "Nhấn bình chọn 1 trong [N] ô đáp án phía dưới để ghi nhận câu trả lời và nhận quà",
+      "chatgpt_image_prompt": "Social media poll graphic for Vietnamese financial page 'MaMa Tài Chính'. MoMo pink (#A50064) and white color scheme. Poll question in bold Vietnamese text. Three voting options as rounded rectangles. Clean modern design, mobile-optimized 1:1 square. Brand watermark bottom-right."
+    },
+    "educational_post": {
+      "opener": "[🧠💡 hoặc emoji phù hợp] BÀI HỌC TÀI CHÍNH NHỎ: [TIÊU ĐỀ IN HOA] hoặc [Con số bất ngờ làm hook]",
+      "structure": "Hook con số/câu hỏi bất ngờ → Insight chính (dùng số thứ tự 1️⃣ 2️⃣ 3️⃣ hoặc bullet) → Tip thực tế kết nối MoMo → Câu hỏi mở kết bài",
+      "avg_length_chars": 480,
+      "emoji_anchors": [
+        "🧠",
+        "💡",
+        "👉",
+        "💬",
+        "😉",
+        "💙",
+        "1️⃣",
+        "2️⃣",
+        "3️⃣"
+      ],
+      "cta_pattern": "Tag bạn bè cùng đọc nhé! 🙌 / Bạn thấy tip này hữu ích không?",
+      "chatgpt_image_prompt": "Educational infographic for Vietnamese personal finance. MoMo brand colors (#A50064 pink, white background). Large bold stat or number as focal point. Icon-based design, 'Be Vietnam Pro' font style. Vertical 4:5 ratio, mobile-first. Subtle 'MaMa Tài Chính' watermark."
+    },
+    "market_update": {
+      "opener": "[📈 hoặc 📰] Cập nhật [thời gian/phiên]: [Headline ngắn với số liệu cụ thể]",
+      "structure": "Headline + số liệu VN-Index/cổ phiếu cụ thể → 2–3 quan sát chính (top tăng, top giảm, điểm đáng chú ý) → Câu hỏi dự đoán/nhận xét của cộng đồng",
+      "avg_length_chars": 350,
+      "emoji_anchors": [
+        "📈",
+        "📉",
+        "📰",
+        "🔍",
+        "⬆️",
+        "⬇️"
+      ],
+      "cta_pattern": "Theo dõi MaMa Tài Chính để không bỏ lỡ cập nhật thị trường! 📈",
+      "chatgpt_image_prompt": "Stock market update graphic, Vietnamese market data. Mini bar chart with green (up) and red (down). MoMo logo bottom-right. Dark blue and white with #A50064 pink accent. Timestamp visible. 16:9 landscape format. Professional financial media style."
+    },
+    "qa": {
+      "opener": "Nhiều bạn hỏi MaMa: \"[Câu hỏi thực từ cộng đồng]\" hoặc Q: \"[Câu hỏi]\" A: MaMa giải đáp!",
+      "structure": "Đặt câu hỏi người dùng hay hỏi (in nghiêng hoặc trong quotes) → Trả lời súc tích dùng số liệu/ví dụ thực tế → Mở rộng: liên hệ tính năng MoMo → Kêu gọi câu hỏi tiếp theo",
+      "avg_length_chars": 420,
+      "emoji_anchors": [
+        "💡",
+        "👉",
+        "💬",
+        "✅",
+        "❓"
+      ],
+      "cta_pattern": "Còn câu hỏi khác? Comment cho MaMa biết nhé! 💬",
+      "chatgpt_image_prompt": "Q&A style graphic for Vietnamese financial page. Question in MoMo pink (#A50064) speech bubble, answer in light gray background card. Clean Vietnamese typography, mobile-first design. 4:5 ratio. 'MaMa Tài Chính' branding."
+    },
+    "minigame": {
+      "opener": "🎮 MINIGAME [TIÊU ĐỀ GAME]: [Mô tả phần thưởng hấp dẫn]",
+      "structure": "Tên game + phần thưởng nổi bật → Cách chơi ngắn gọn tối đa 3 bước → Deadline rõ → CTA tham gia ngay",
+      "avg_length_chars": 380,
+      "emoji_anchors": [
+        "🎮",
+        "🏆",
+        "🎁",
+        "⏰",
+        "🌟",
+        "🎉"
+      ],
+      "cta_pattern": "Tham gia ngay — phần thưởng chờ bạn! 🎁",
+      "chatgpt_image_prompt": "Fun minigame graphic for Vietnamese fintech social media. Vibrant colors: MoMo pink #A50064, gold #F6C315. Prize badge prominent. Playful Vietnamese typography. Confetti elements. Countdown timer visual. 1:1 square format. Exciting, engaging mobile aesthetic."
+    },
+    "confession_discussion": {
+      "opener": "💬 \"[Câu confession/trải nghiệm thực trong dấu ngoặc kép — viết như người thật chia sẻ]\"",
+      "structure": "Confession/câu hỏi đồng cảm trong quotes → 1–2 câu phản ứng empathy từ MaMa → Kêu gọi chia sẻ trải nghiệm tương tự → Câu hỏi mở kích thích comment nhiều chiều",
+      "avg_length_chars": 300,
+      "emoji_anchors": [
+        "💬",
+        "💙",
+        "🤔",
+        "😅",
+        "👇"
+      ],
+      "cta_pattern": "Chia sẻ trải nghiệm của bạn bên dưới — MaMa đọc tất cả! 💬",
+      "chatgpt_image_prompt": "Quote card design for Vietnamese financial community. Warm muted tones: cream #FFF8F0, soft pink. Italic quote text in speech bubble. Conversational, cozy vibe. No real human faces. Vietnamese text. 4:5 ratio mobile format. 'MaMa Tài Chính' watermark."
+    },
+    "service_faq": {
+      "opener": "Mẹo nhỏ: [Điều bạn đang bỏ lỡ — lợi ích cụ thể] hoặc Bạn đang bỏ sót [X] mỗi tháng mà không biết!",
+      "structure": "Hook — điều người dùng đang bỏ lỡ/chưa biết → Step-by-step hướng dẫn ngắn gọn (tối đa 3–4 bước) → Kết quả cụ thể người dùng nhận được → CTA thử ngay",
+      "avg_length_chars": 350,
+      "emoji_anchors": [
+        "💡",
+        "👉",
+        "✅",
+        "📱",
+        "💸"
+      ],
+      "cta_pattern": "Thử ngay trên app MoMo và cho MaMa biết kết quả nhé! 😉",
+      "chatgpt_image_prompt": "MoMo app tutorial screenshot style. Step-by-step arrows annotation. White clean background. MoMo purple/pink brand colors. Vietnamese app UI elements. Instructional how-to graphic. 4:5 ratio mobile format."
+    },
+    "promo_info": {
+      "opener": "💸 [ĐỢT ƯU ĐÃI/KHUYẾN MÃI CAPS LOCK]: [Con số hoàn tiền/giá trị TO và rõ ràng]!",
+      "structure": "Số tiền/% hoàn lớn và nổi bật → Điều kiện áp dụng súc tích (3–5 bullet) → Deadline rõ ràng → CTA áp dụng ngay trước khi hết hạn",
+      "avg_length_chars": 320,
+      "emoji_anchors": [
+        "💸",
+        "🔥",
+        "⏰",
+        "✨",
+        "🎯"
+      ],
+      "cta_pattern": "Áp dụng ngay trên MoMo trước khi hết hạn! ⏰",
+      "chatgpt_image_prompt": "Promotional banner Vietnamese fintech. Large bold cashback/discount amount in center (#F6C315 gold highlight on #A50064 MoMo pink background). Urgency deadline badge. Vietnamese promo text. Vibrant, eye-catching. 16:9 landscape format. High contrast."
+    }
+  },
+  "visual_design": {
+    "brand_colors": {
+      "primary": "#A50064",
+      "background": "#F9F9F9",
+      "card": "#FFFFFF",
+      "pink_light": "#FFEFF4",
+      "gold_urgency": "#F6C315",
+      "success": "#22C55E",
+      "danger": "#EF4444",
+      "text_main": "#1A1A1A",
+      "text_secondary": "#6B7280"
+    },
+    "typography": {
+      "font": "Be Vietnam Pro",
+      "heading": "Bold, tight letter-spacing, 20–28px",
+      "body": "Regular, 15–16px, 1.6 line-height",
+      "badge": "11–12px, Semibold, uppercase, letter-spacing 0.4px",
+      "hook_display": "Bold, 22–26px, có thể CAPS LOCK để nhấn mạnh"
+    },
+    "image_direction": {
+      "photography_style": "Clean, modern Vietnamese lifestyle — người Việt 22–45 tuổi, gần gũi, không phô trương, không quá corporate",
+      "prefer": [
+        "Infographic tài chính với số liệu thực",
+        "Icon-based design, chart/data visualization",
+        "Screenshot app MoMo có annotation mũi tên",
+        "Flat illustration phong cách Việt Nam hiện đại"
+      ],
+      "avoid": [
+        "Stock photo người Tây",
+        "Hình quá formal/corporate/bộ vest cứng nhắc",
+        "Ảnh người thật nếu không có bản quyền rõ ràng",
+        "Quá nhiều text trong ảnh — dễ bị Facebook crop"
+      ],
+      "chatgpt_general_direction": "Vietnamese financial social media post for page 'MaMa Tài Chính' by MoMo. Style: clean, modern, trustworthy yet friendly. Brand colors: MoMo pink #A50064, white, light gray #F9F9F9. Typography: bold Vietnamese text 'Be Vietnam Pro'. Watermark: 'MaMa Tài Chính' in corner. Mobile-optimized. No Western stock photos."
+    }
+  },
+  "frameworks": {
+    "primary": "HOOK → CONTEXT → INSIGHT → CTA mở",
+    "HOOK-CONTEXT-CTA": "Hook gây tò mò/bất ngờ → Context 1–2 câu (số liệu, bối cảnh thực) → CTA rõ ràng, câu hỏi mở",
+    "PROBLEM-INSIGHT-SOLUTION": "Vấn đề quen thuộc người dùng → Insight bất ngờ từ data/góc nhìn → Giải pháp/hành động cụ thể với MoMo",
+    "STORY-LESSON-APPLY": "Câu chuyện/confession ngắn → Bài học rút ra → Áp dụng thực tế ngay trên app",
+    "DATA-ANGLE-QUESTION": "Con số bất ngờ mở đầu → Giải thích từ góc thị trường → Câu hỏi kêu gọi chia sẻ",
+    "SERIES-FORMAT": "Chuỗi bài đánh số (BÀI 1, BÀI 2...) để tạo thói quen theo dõi và cảm giác tiến trình học"
+  },
+  "engagement_triggers": {
+    "high_er_organic_count": 11,
+    "window_days": 90,
+    "emoji_in_opener_pct": 100,
+    "number_in_content_pct": 82,
+    "question_present_pct": 36
+  },
+  "recency_weighted": true,
+  "approved_content_count": 0,
+  "organic_posts_analyzed": 23,
+  "total_posts_analyzed": 75,
+  "format_analysis": {
+    "market_update": {
+      "sample_size": 3,
+      "avg_er": 0.7793,
+      "avg_length_chars": 109,
+      "top_openers": [
+        {
+          "preview": "📊 Tổng hợp diễn biến thị trường phiên Chiều ngày 28/04/2026\r\nCùng theo dõi và thảo luận cơ hội đầu tư nhé 👇",
+          "er": 0.7963246554364471,
+          "has_reward": false
+        },
+        {
+          "preview": "📊 Tổng hợp diễn biến thị trường phiên Chiều ngày 24/04/2026\r\nCùng theo dõi và thảo luận cơ hội đầu tư nhé 👇",
+          "er": 0.7905918057663126,
+          "has_reward": false
+        },
+        {
+          "preview": "📊 Tổng hợp diễn biến thị trường phiên Sáng ngày 28/04/2026\r\nCùng theo dõi và thảo luận cơ hội đầu tư nhé 👇",
+          "er": 0.7510373443983402,
+          "has_reward": false
+        }
+      ]
+    },
+    "poll": {
+      "sample_size": 38,
+      "avg_er": 0.3754,
+      "avg_length_chars": 997,
+      "top_openers": [
+        {
+          "preview": "📊 DỰ ĐOÁN 22/04: GIÁ CỔ PHIẾU VIC TĂNG, GIẢM HAY KHÔNG ĐỔI 📊Phiên ngày 22/04, VIC trở thành tâm điểm trong phiên giao",
+          "er": 0.7075621364357483,
+          "has_reward": true
+        },
+        {
+          "preview": "📊 DỰ ĐOÁN 24/04: GIÁ CỔ PHIẾU VNM TĂNG, GIẢM HAY KHÔNG ĐỔI 📊Phiên ngày 24/04, VNM trở thành tâm điểm trong phiên giao",
+          "er": 0.7036964021685559,
+          "has_reward": true
+        },
+        {
+          "preview": "📊 DỰ ĐOÁN 20/04: GIÁ CỔ PHIẾU GEE TĂNG, GIẢM HAY KHÔNG ĐỔI 📊Phiên ngày 20/04, GEE trở thành tâm điểm trong phiên giao",
+          "er": 0.6709828956877861,
+          "has_reward": true
+        }
+      ]
+    },
+    "educational_post": {
+      "sample_size": 6,
+      "avg_er": 0.5002,
+      "avg_length_chars": 1093,
+      "top_openers": [
+        {
+          "preview": "🧘‍♂️ MUỐN GIA TĂNG TÀI SẢN, HÃY HỌC CÁCH “GIỮ MÌNH\" TRƯỚC KHI “GIỮ TIỀNAi cũng khao khát tự chủ tài chính, nhưng thực t",
+          "er": 0.7482625482625482,
+          "has_reward": false
+        },
+        {
+          "preview": "🤔 BẠN ĐÃ DỰ TRÙ ĐƯỢC BAO NHIÊU “THÁNG AN TOÀN\" RỒI?&nbsp;Gia tăng tài sản là một cuộc đua marathon, không phải chạy nướ",
+          "er": 0.5897404505386875,
+          "has_reward": false
+        },
+        {
+          "preview": "📉 BẠN CÓ ĐANG ĐỂ TIỀN NHÀN RỖI “BỐC HƠI\" MỖI NGÀY? Nhiều người cho rằng để tiền trong tài khoản là an toàn. Nhưng sự th",
+          "er": 0.5809229769255768,
+          "has_reward": false
+        }
+      ]
+    },
+    "post": {
+      "sample_size": 19,
+      "avg_er": 0.4924,
+      "avg_length_chars": 722,
+      "top_openers": [
+        {
+          "preview": "KHOE SỨC KHỎE TÀI CHÍNH NĂM BÍNH NGỌMaMa mời bạn tham gia thi “Khoe sức khỏe tài chính” để cùng nhìn lại tình hình tài c",
+          "er": 0.8506827695052495,
+          "has_reward": true
+        },
+        {
+          "preview": "🧠💡&nbsp;ĐẤU TRƯỜNG MOMO 12H30 NGÀY 22/02MỌI NGƯỜI PHẢN ỨNG NHƯ THẾ NÀO VỚI TRẬN ĐẤU HÔM NAY❓Thật vui khi được đồng hàn",
+          "er": 0.8496894409937888,
+          "has_reward": true
+        },
+        {
+          "preview": "📣 THÔNG BÁO LỊCH NGHỈ LỄ TẾT NGUYÊN ĐÁN 2026CỦA CHỨNG KHOÁN CV TRÊN MOMO  🌸 Chứng Khoán CV trên MoMo trân trọng thông",
+          "er": 0.8070175438596491,
+          "has_reward": false
+        }
+      ]
+    },
+    "service_faq": {
+      "sample_size": 5,
+      "avg_er": 0.4078,
+      "avg_length_chars": 1148,
+      "top_openers": [
+        {
+          "preview": "😍 LƯƠNG VỀ \"ĐẦY TÚI\" LÀM SAO ĐỂ SỐNG THOẢI MÁI NHƯNG VẪN ĐỦ DƯ DẢ ĐỂ TÍCH LŨY?Thời khắc \"lúa\" về là khoảnh khắc hạnh ph",
+          "er": 0.6984126984126984,
+          "has_reward": false
+        },
+        {
+          "preview": "📢 MaMa thông báo: MoMo dừng hỗ trợ toàn bộ giao dịch cho Dịch vụ Chứng Chỉ Quỹ kể từ ngày 01/07/2026 và chuẩn bị ra mắt",
+          "er": 0.5275024431104286,
+          "has_reward": false
+        },
+        {
+          "preview": "🔥 TIẾT KIỆM VỚI LÃI SUẤT LÊN TỚI 7,2% CHO KÌ HẠN 6 THÁNG!Tiết Kiệm Online trên MoMo mới cập nhật lãi suất lên đến 7,2%/",
+          "er": 0.3154875717017208,
+          "has_reward": false
+        }
+      ]
+    },
+    "minigame": {
+      "sample_size": 4,
+      "avg_er": 0.2937,
+      "avg_length_chars": 925,
+      "top_openers": [
+        {
+          "preview": "🎁 CUỘC THI CHIA SẺ ẢNH TUẦN 4: CHIA THƯỞNG TIỀN MẶT VÀ TRIỆU XUCả nhà ơi, cùng MaMa tham gia Minigame chia quà 5.000",
+          "er": 0.6127911612278604,
+          "has_reward": true
+        },
+        {
+          "preview": "🎁 CUỘC THI CHIA SẺ ẢNH TUẦN 2: CHIA THƯỞNG TIỀN MẶT VÀ TRIỆU XUCả nhà ơi, cùng MaMa tham gia Minigame chia quà 5.000",
+          "er": 0.22181818181818183,
+          "has_reward": true
+        },
+        {
+          "preview": "🎁 MINIGAME CÓ 1-0-2: CHIA THƯỞNG TIỀN MẶT VÀ TRIỆU XU Tham gia Minigame cùng MaMa chia quà 5.000.000đ và săn 8 triệu Xu",
+          "er": 0.21836648328396108,
+          "has_reward": true
+        }
+      ]
+    }
+  },
+  "top_angles_organic": [
+    {
+      "topic": "Khác",
+      "format": "market_update",
+      "best_er": 0.7963246554364471,
+      "best_post_preview": "📊 Tổng hợp diễn biến thị trường phiên Chiều ngày 28/04/2026\r\nCùng theo dõi và thảo luận cơ hội đầu tư nhé 👇",
+      "sample_count": 3,
+      "weighted_er_sum": 2.3379538056011,
+      "weight_sum": 3,
+      "avg_er": 0.7793179352003667,
+      "has_approved": false,
+      "approved_preview": null
+    },
+    {
+      "topic": "Sản phẩm tiết kiệm & lãi suất",
+      "format": "educational_post",
+      "best_er": 0.7482625482625482,
+      "best_post_preview": "🧘‍♂️ MUỐN GIA TĂNG TÀI SẢN, HÃY HỌC CÁCH “GIỮ MÌNH\" TRƯỚC KHI “GIỮ TIỀNAi cũng khao khát tự chủ tài chính, nhưng thực tế cho thấy: Bước khó nhất trên hành trình ấy không phải là kiếm thật nhiều tiền,",
+      "sample_count": 4,
+      "weighted_er_sum": 2.4688948618500235,
+      "weight_sum": 4,
+      "avg_er": 0.6172237154625059,
+      "has_approved": false,
+      "approved_preview": null
+    },
+    {
+      "topic": "Phân tích thị trường chứng khoán",
+      "format": "post",
+      "best_er": 0.8070175438596491,
+      "best_post_preview": "📣 THÔNG BÁO LỊCH NGHỈ LỄ TẾT NGUYÊN ĐÁN 2026CỦA CHỨNG KHOÁN CV TRÊN MOMO  🌸 Chứng Khoán CV trên MoMo trân trọng thông báo đến Quý nhà đầu tư lịch nghỉ Tết Nguyên Đán Bính Ngọ 2026 như sau:👉 Thời gi",
+      "sample_count": 2,
+      "weighted_er_sum": 1.1990233228146214,
+      "weight_sum": 2,
+      "avg_er": 0.5995116614073107,
+      "has_approved": false,
+      "approved_preview": null
+    },
+    {
+      "topic": "Phân tích thị trường chứng khoán",
+      "format": "service_faq",
+      "best_er": 0.5275024431104286,
+      "best_post_preview": "📢 MaMa thông báo: MoMo dừng hỗ trợ toàn bộ giao dịch cho Dịch vụ Chứng Chỉ Quỹ kể từ ngày 01/07/2026 và chuẩn bị ra mắt mô hình mới Chứng Chỉ Quỹ CVS🌟Nhằm mang đến trải nghiệm đầu tư đơn giản và tối",
+      "sample_count": 1,
+      "weighted_er_sum": 0.5275024431104286,
+      "weight_sum": 1,
+      "avg_er": 0.5275024431104286,
+      "has_approved": false,
+      "approved_preview": null
+    },
+    {
+      "topic": "Sản phẩm tiết kiệm & lãi suất",
+      "format": "service_faq",
+      "best_er": 0.6984126984126984,
+      "best_post_preview": "😍 LƯƠNG VỀ \"ĐẦY TÚI\" LÀM SAO ĐỂ SỐNG THOẢI MÁI NHƯNG VẪN ĐỦ DƯ DẢ ĐỂ TÍCH LŨY?Thời khắc \"lúa\" về là khoảnh khắc hạnh phúc nhất tháng, nhưng cũng là lúc chúng ta dễ sa đà vào việc vung tay quá trán. Đ",
+      "sample_count": 3,
+      "weighted_er_sum": 1.2105629981469275,
+      "weight_sum": 3,
+      "avg_er": 0.4035209993823092,
+      "has_approved": false,
+      "approved_preview": null
+    },
+    {
+      "topic": "Khác",
+      "format": "post",
+      "best_er": 0.6921487603305785,
+      "best_post_preview": "🌊 BẠN BỎ LỠ \"SÓNG\" VÌ KHÔNG KỊP NẮM TÍN HIỆU THỊ TRƯỜNGTừ nay, bạn không cần lo lắng bỏ lỡ \"sóng\" thị trường hay không cần mất công tìm kiếm tin tức vì đã có thông báo cập nhật biến động thị trường m",
+      "sample_count": 6,
+      "weighted_er_sum": 2.0448535525258773,
+      "weight_sum": 6,
+      "avg_er": 0.34080892542097957,
+      "has_approved": false,
+      "approved_preview": null
+    },
+    {
+      "topic": "Khác",
+      "format": "educational_post",
+      "best_er": 0.29298380878951424,
+      "best_post_preview": "💡 MỘT THÓI QUEN NHỎ GIÚP BẠN QUẢN LÝ TIỀN TỐT HƠNNhiều người nghĩ quản lý tài chính phải bắt đầu bằng những kế hoạch lớn.Nhưng thật ra, bước đầu tiên lại rất đơn giản:Biết mình đang có bao nhiêu tiền",
+      "sample_count": 1,
+      "weighted_er_sum": 0.29298380878951424,
+      "weight_sum": 1,
+      "avg_er": 0.29298380878951424,
+      "has_approved": false,
+      "approved_preview": null
+    },
+    {
+      "topic": "Giáo dục tài chính & chi tiêu",
+      "format": "educational_post",
+      "best_er": 0.23941947987560283,
+      "best_post_preview": "✨ CHỈ 1 LẦN BẬT THÊM LỜI NHÀN TÊNH, ĐỂ TÚI LO TẤTVới Túi bạn vừa tiện lợi chi tiêu mà vẫn có thể sinh lời, nhưng nếu quên nạp vài ngày thôi thì tiền đã ngủ yên thay vì thêm lời cho bạn rồi đó.😍 Để Ma",
+      "sample_count": 1,
+      "weighted_er_sum": 0.23941947987560283,
+      "weight_sum": 1,
+      "avg_er": 0.23941947987560283,
+      "has_approved": false,
+      "approved_preview": null
+    },
+    {
+      "topic": "Giáo dục tài chính & chi tiêu",
+      "format": "post",
+      "best_er": 0.22854836706817336,
+      "best_post_preview": "🎉 ĐẠI LỄ GẦN KỀ, BẠN ĐÃ SẴN SÀNG CHƯA?Giỗ Tổ vừa qua, 30/4 đã gõ cửa. Ăn uống, mua sắm, đi chơi xa… lễ này chắc chắn sẽ “chi” kha khá. MaMa hỏi nhỏ: Bạn có ngại chi mạnh tay vì sợ tốn nhiều, sau lễ l",
+      "sample_count": 2,
+      "weighted_er_sum": 0.39655970592556544,
+      "weight_sum": 2,
+      "avg_er": 0.19827985296278272,
+      "has_approved": false,
+      "approved_preview": null
+    }
+  ]
+}

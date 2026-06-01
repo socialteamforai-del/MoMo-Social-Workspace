@@ -3,3 +3,8 @@ dist/
 .env
 .claude/
 *.log
+
+server.out
+server.err
+Ref Element/
+vite.out

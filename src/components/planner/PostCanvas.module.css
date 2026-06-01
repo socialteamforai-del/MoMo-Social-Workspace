@@ -1,0 +1,92 @@
+/* ── Canvas wrapper ── */
+.canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  user-select: none;
+}
+
+/* ── Top-left: badge + headline ── */
+.topLeft {
+  position: absolute;
+  top: 7%;
+  left: 6%;
+  right: 22%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.badge {
+  display: inline-block;
+  align-self: flex-start;
+  color: white;
+  font-size: clamp(9px, 1.8cqw, 13px);
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.2px;
+}
+
+.headline {
+  font-size: clamp(13px, 3.2cqw, 20px);
+  font-weight: 800;
+  color: #111;
+  line-height: 1.25;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Center illustration ── */
+.center {
+  position: absolute;
+  top: 28%;
+  left: 3%;
+  right: 5%;
+  bottom: 14%;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.illustration {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  display: block;
+}
+
+/* ── Bottom CTA bar ── */
+.ctaBar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 13%;
+  background: #A50064;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.ctaText {
+  color: white;
+  font-size: clamp(10px, 2.2cqw, 14px);
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

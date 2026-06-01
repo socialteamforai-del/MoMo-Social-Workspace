@@ -1,0 +1,198 @@
+{
+  "page_id": "heo_dat_momo",
+  "page_name": "Heo Đất MoMo",
+  "built_at": "2026-05-25T00:00:00.000Z",
+  "note": "Viết thủ công từ phân tích 112 bài thực tế (Mar–May 2026). Dùng 'Rebuild' trong Settings khi có đủ data mới để cập nhật phần data-driven.",
+  "recency_weighted": false,
+  "approved_content_count": 0,
+  "organic_posts_analyzed": 112,
+  "total_posts_analyzed": 112,
+
+  "voice": {
+    "persona": "Heo Đất — chú heo hồng ngây ngô nhưng đầy yêu thương, là người bạn đồng hành của hàng triệu chủ trại, cùng cộng đồng làm nên những điều kỳ diệu từ những hành động nhỏ",
+    "tone": "Playful, ấm áp, năng lượng cao. Viết như đang nói chuyện trực tiếp với bạn bè thân — vui vẻ, không cứng nhắc, không NGO. Khi kêu gọi quyên góp thì ấm áp chứ không bi lụy. Khi minigame thì hào hứng bùng nổ.",
+    "address_style": "Xưng 'Heo' (không phải 'chúng tôi' hay 'Heo Đất MoMo'). Gọi độc giả là 'cả nhà', 'chủ trại', 'các chủ trại nhà mình'. Dùng 'nha', 'nhen', 'ơi', 'đó', 'nè' để tạo cảm giác thân mật.",
+    "vocabulary": {
+      "preferred": [
+        "cả nhà", "chủ trại", "Heo", "nha", "nhen", "ơi", "nè",
+        "rinh", "siêu", "cực", "ngay",
+        "Túi Thần Tài", "Heo Vàng", "chủ trại may mắn",
+        "cùng nhau", "chung tay", "hành trình",
+        "tử tế", "yêu thương", "kỳ diệu",
+        "tham gia ngay", "nhận ngay", "nhanh tay"
+      ],
+      "avoid": [
+        "quý khách", "kính thưa", "chúng tôi xin",
+        "theo định nghĩa", "nhà hảo tâm",
+        "dù nhỏ đều tạo nên sự thay đổi lớn",
+        "nếp nghĩ", "bền vững", "thế hệ trẻ Việt Nam",
+        "—", "em dash",
+        "thực trạng", "giải pháp", "triển khai"
+      ]
+    },
+    "emoji_style": "Emoji đầu bài LUÔN CÓ — 97% bài ER cao dùng emoji ở dòng đầu. Emoji cảm xúc: 🐷💛🌻💚🌱🎁🧧. Emoji CTA: 👉📝⏰📢📌🗓️. Tối đa 4–5 emoji per bài — không spam."
+  },
+
+  "storytelling": {
+    "primary_framework": "HOOK playful/ấm áp → REWARD rõ ràng (nếu có) → CƠ CHẾ đơn giản 1–2 bước → DEADLINE cụ thể → CTA kéo tương tác",
+    "frameworks": {
+      "HOOK-REWARD-MECHANIC": "Hook gây tò mò hoặc cảm xúc → Announce reward ngay (đừng để cuối) → Cơ chế tham gia cực đơn giản → Deadline → CTA tag bạn / bình luận",
+      "STORY-IMPACT-GRATITUDE": "Mở bằng con số cụ thể (X lượt quyên góp, Y triệu đồng) → Kể điều đã tạo ra được (bao nhiêu suất HB, bao nhiêu trẻ em) → Cảm ơn cộng đồng chân thành, không sáo",
+      "SEASONAL-EMOTION-CTA": "Gắn với thời điểm (đầu tháng, mùa hè, dịp lễ) → Cảm xúc nhẹ nhàng / hài hước → Reward hoặc CTA tham gia cộng đồng"
+    },
+    "structure_principles": [
+      "Câu ngắn, đoạn ngắn — mobile-first, không quá 2–3 câu/đoạn",
+      "Announce reward sớm — không để user đọc đến cuối mới biết có quà",
+      "Cơ chế tham gia viết thành bước đánh số rõ ràng (Bước 1, Bước 2) — tối đa 3 bước",
+      "Deadline LUÔN ghi ngày cụ thể — không dùng 'sắp tới' hay 'trong thời gian tới'",
+      "Kết bài bằng CTA hành động: bình luận, tag bạn, tham gia ngay — không để bài 'chết'",
+      "Bài thành quả: luôn có số liệu cụ thể (lượt quyên góp, số tiền, số người được giúp)",
+      "Không hashtag trừ khi có chiến dịch chính thức"
+    ]
+  },
+
+  "format_patterns": {
+    "minigame_quiz": {
+      "description": "Đố vui, giải đố, nhìn hình đoán chữ. User dùng não để trả lời → comment = đáp án. ER cao nhất page (24% avg, top 68%).",
+      "opener": "[TITLE CAPS LOCK]: [Mô tả reward hấp dẫn] 🧧🐷",
+      "structure": "Headline CAPS + reward ngay dòng đầu → Câu hỏi đố / hình ảnh → Cú pháp bình luận rõ ràng ([Đáp án] + [Số may mắn]) → Số lượng người thắng → Deadline → Thời gian công bố",
+      "avg_length_chars": 515,
+      "emoji_anchors": ["🧧", "🐷", "📝", "🎁", "⏰", "📢"],
+      "cta_pattern": "Bình luận đáp án theo cú pháp: [Đáp án] + [Số may mắn từ 1-9999]",
+      "reward_position": "Dòng 1–2, trước khi giải thích cơ chế",
+      "example_opener": "ĐỐ VUI RINH LỘC: GIẢI ĐỐ HAY - NHẬN NGAY 100K 🧧🐷\nCơ hội nhận 100.000đ về Túi Thần Tài cho các chủ trại của Heo Đất MoMo đến rồi đây"
+    },
+
+    "gamified_reward": {
+      "description": "Hành động đơn giản (thả tim, tag bạn, bình luận ảnh) → nhận quà. Không cần suy nghĩ. Likes cao, dùng để push hành vi cụ thể (quyên góp, follow cộng đồng).",
+      "opener": "[HEADLINE CAPS hoặc câu hook theo trend/thời điểm] [emoji cảm xúc]",
+      "structure": "Hook dựa vào thời điểm hoặc cảm xúc → Announce quà ngay → CTA 1 hành động duy nhất (THẢ TIM / BÌNH LUẬN ẢNH) → Deadline vào-ra quà rõ → Lưu ý điều kiện tham gia (nếu cần) → Tag bạn",
+      "avg_length_chars": 839,
+      "emoji_anchors": ["🐷", "✨", "💛", "👉", "⏰", "🗓️", "🎁", "📌"],
+      "cta_pattern": "THẢ TIM ngay bài viết này để nhận [tên quà] nha cả nhà ơi! / Bình luận ảnh chụp màn hình + tag hàng xóm",
+      "reward_position": "Dòng 3–4, sau hook cảm xúc",
+      "example_opener": "NHẬN MŨ CÓI XINH, TỰ TIN ĐÓN NẮNG! 🏝️✨\nKỳ nghỉ kết thúc rồi, các chủ trại nhà mình đã nạp năng lượng chưa ạ? Để tiếp thêm động lực, Heo Đất tặng ngay một món quà siêu xinh đây 💛"
+    },
+
+    "thanh_qua_du_an": {
+      "description": "Báo cáo kết quả dự án/chiến dịch đã hoàn thành. Cần số liệu cụ thể + tác động thực. ER avg 14–29%.",
+      "opener": "[Tên thành quả cụ thể] [emoji 🌻 hoặc 💫]",
+      "structure": "Headline tên dự án + số liệu chính → Con số cụ thể (X triệu đồng từ Y lượt quyên góp) → Tác động thực tế (bao nhiêu người được giúp, điều gì thay đổi) → Cảm ơn cộng đồng — chân thành, không sáo",
+      "avg_length_chars": 878,
+      "emoji_anchors": ["🌻", "💛", "💚", "💫", "🌼"],
+      "cta_pattern": "Xin cảm ơn cộng đồng đã cùng chung tay [làm điều gì cụ thể]",
+      "mandatory_elements": [
+        "Tổng tiền huy động (VNĐ cụ thể)",
+        "Số lượt quyên góp",
+        "Số người / đơn vị thụ hưởng",
+        "Tên tổ chức / địa điểm thụ hưởng (nếu có)"
+      ],
+      "example_opener": "Hỗ trợ dinh dưỡng cho 230 em học sinh tại trường Ánh Linh 🌻\nNhờ có sự chung tay của cộng đồng, dự án đã huy động thành công hơn 200 triệu đồng từ 55.085 lượt quyên góp."
+    },
+
+    "donation_call": {
+      "description": "Kêu gọi quyên góp cho chiến dịch đang chạy. Cần ấm áp, không guilt trip, hướng dẫn rõ từng bước.",
+      "opener": "[Emoji ấm] [Hook cảm xúc nhẹ nhàng về tác động]",
+      "structure": "Hook bối cảnh ấm áp (ai đang cần giúp, tại sao hôm nay) → Cơ chế quyên góp từng bước (Bước 1–N) → Reward nếu có → Deadline chiến dịch → CTA nhẹ nhàng",
+      "avg_length_chars": 771,
+      "emoji_anchors": ["💛", "💚", "🌱", "👉", "⏰"],
+      "cta_pattern": "Chung tay góp [hành động cụ thể] ngay hôm nay để [tác động cụ thể] bạn nhé!",
+      "tone_note": "KHÔNG dùng: 'mỗi đóng góp dù nhỏ', 'thay đổi lớn', 'hoàn cảnh khó khăn' kiểu template. Thay bằng con số cụ thể và câu chuyện thật."
+    },
+
+    "event_comms": {
+      "description": "Thông báo/kêu gọi tham gia sự kiện (Trường học Heo Đất, Heo Đi Bộ, sự kiện nhận quà). Hiện chiếm ít bài nhưng BU muốn tăng.",
+      "opener": "[Tên sự kiện CAPS] — [Ngắn gọn điều hấp dẫn nhất] [emoji]",
+      "structure": "Tên sự kiện + ngày giờ → Điều đặc biệt của sự kiện này (không phải lần nào cũng như nhau) → Cách tham gia ngắn gọn → Reward nếu có → CTA",
+      "avg_length_chars": 600,
+      "emoji_anchors": ["🐷", "💛", "📍", "⏰", "🎁", "👉"],
+      "cta_pattern": "Tham gia ngay tại [link/nơi đăng ký] trước [deadline] nha cả nhà!",
+      "mandatory_elements": [
+        "Ngày giờ cụ thể",
+        "Địa điểm hoặc link tham gia",
+        "Điều kiện tham gia (nếu có)"
+      ]
+    },
+
+    "kindness_story": {
+      "description": "Câu chuyện cộng đồng, milestone, kỷ niệm. Cảm xúc thật, không template. Hiếm nhưng ER tốt khi làm đúng.",
+      "opener": "[Hook cảm xúc — câu đặt vấn đề hoặc flashback] 💌",
+      "structure": "Hook cảm xúc thật → Câu chuyện ngắn dạng kể (Heo nhớ lại / cộng đồng đã làm gì) → Số liệu milestone nếu có → CTA nhẹ: xem video / bình luận cảm nhận",
+      "avg_length_chars": 700,
+      "emoji_anchors": ["💌", "🐷", "💛", "✨", "🎥"],
+      "cta_pattern": "Mời cả nhà cùng Heo nhìn lại [hành trình/khoảnh khắc] này nhé! / Comment cảm nhận của bạn bên dưới nha 💛",
+      "tone_note": "Đây là lúc duy nhất được viết dài hơn và cảm xúc hơn. Nhưng không được bi lụy hay nặng nề."
+    }
+  },
+
+  "top_angles_organic": [
+    {
+      "topic": "Minigame / Đố vui rinh lộc",
+      "format": "minigame_quiz",
+      "avg_er": 0.242,
+      "best_er": 0.681,
+      "sample_count": 19,
+      "best_post_preview": "ĐỐ VUI RINH LỌC: GIẢI ĐỐ HAY - NHẬN NGAY 100K 🧧🐷\nCơ hội nhận 100.000đ về Túi Thần Tài cho các chủ trại của Heo Đất MoMo đến rồi đây",
+      "has_approved": false
+    },
+    {
+      "topic": "Gamified reward — thả tim nhận quà",
+      "format": "gamified_reward",
+      "avg_er": 0.173,
+      "best_er": 0.550,
+      "sample_count": 16,
+      "best_post_preview": "CHÀO THÁNG 4, NHẬN CÁNH BƯỚM ÁNH CAM 🔥\nNgười ta nói tháng Tư là lời nói dối, nhưng tình cảm Heo dành cho cả nhà lúc nào cũng là Thật 100%",
+      "has_approved": false
+    },
+    {
+      "topic": "Thành quả dự án quyên góp",
+      "format": "thanh_qua_du_an",
+      "avg_er": 0.139,
+      "best_er": 0.293,
+      "sample_count": 27,
+      "best_post_preview": "Hỗ trợ dinh dưỡng cho 230 em học sinh tại trường Ánh Linh 🌻\nDự án huy động thành công hơn 200 triệu đồng từ 55.085 lượt quyên góp",
+      "has_approved": false
+    },
+    {
+      "topic": "Kêu gọi quyên góp chiến dịch đang chạy",
+      "format": "donation_call",
+      "avg_er": 0.133,
+      "best_er": 0.259,
+      "sample_count": 23,
+      "best_post_preview": "GÓP XU TIẾP NỐI HÀNH TRÌNH TRAO TRIỆU NHỊP THỞ 💛\nMột người góp vài Xu có thể chỉ là một đóng góp nhỏ. Nhưng khi hàng triệu người cùng chung tay...",
+      "has_approved": false
+    },
+    {
+      "topic": "Kindness story — milestone cộng đồng",
+      "format": "kindness_story",
+      "avg_er": 0.219,
+      "best_er": 0.219,
+      "sample_count": 3,
+      "best_post_preview": "GỬI EM, CHÚ HEO HỒNG NGÂY NGÔ CỦA 7 NĂM TRƯỚC... 💌\nHeo Đất 2026: 'em không chỉ có người nuôi, mà là hàng triệu chủ trại đang cùng em làm nên những điều kỳ diệu'",
+      "has_approved": false
+    }
+  ],
+
+  "engagement_triggers": {
+    "high_er_organic_count": 34,
+    "window_days": 90,
+    "emoji_in_opener_pct": 97,
+    "number_in_content_pct": 85,
+    "question_present_pct": 40,
+    "key_signals": [
+      "Reward được announce trong 2 dòng đầu → ER tăng rõ rệt",
+      "Cơ chế bình luận đáp án (minigame_quiz) → comments cao gấp 5–10x so với thả tim",
+      "Số liệu cụ thể trong bài thành quả (triệu đồng, lượt quyên góp, số trẻ em) → tăng trust",
+      "Gắn với thời điểm (đầu tháng, mùa hè, trend mạng xã hội) → gamified_reward ER cao hơn"
+    ]
+  },
+
+  "format_analysis": {
+    "minigame_quiz":    { "sample_size": 19, "avg_er": 0.242, "avg_length_chars": 515 },
+    "gamified_reward":  { "sample_size": 16, "avg_er": 0.173, "avg_length_chars": 839 },
+    "thanh_qua_du_an":  { "sample_size": 27, "avg_er": 0.139, "avg_length_chars": 878 },
+    "donation_call":    { "sample_size": 23, "avg_er": 0.133, "avg_length_chars": 771 },
+    "event_comms":      { "sample_size": 2,  "avg_er": 0.078, "avg_length_chars": 600 },
+    "kindness_story":   { "sample_size": 3,  "avg_er": 0.219, "avg_length_chars": 700 }
+  }
+}

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
-import { ChevronRight, CheckCircle, Lock, Trash2, Sparkles, Copy, ImagePlus, X as XIcon, Loader, RefreshCw } from 'lucide-react'
+import { ChevronRight, CheckCircle, Lock, Trash2, Sparkles, Copy, ImagePlus, X as XIcon, Loader, RefreshCw, Plus } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import styles from './PostListPanel.module.css'
 
@@ -59,9 +59,33 @@ Viết **2 phiên bản caption** hoàn chỉnh, mỗi bản 80–130 chữ. H�
 [caption]`
 }
 
+const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+
+function makeManualSlot() {
+  const today = new Date()
+  return {
+    id:             `manual_${Date.now()}`,
+    day_of_week:    DAY_NAMES[today.getDay()],
+    publish_hour:   9,
+    date:           today.toISOString().split('T')[0],
+    topic_group:    'Khác',
+    content_format: 'post',
+    slot_type:      'flexible',
+    status:         'draft',
+    locked:         false,
+    direction:      {},
+    notes:          '',
+  }
+}
+
 export default function PostListPanel({ onSelectSlot }) {
   const { weeklySlots, setWeeklySlots, data } = useApp()
   const [expandedId, setExpandedId] = useState(null)
+
+  // Filter / search state
+  const [searchQ, setSearchQ]           = useState('')
+  const [filterStatus, setFilterStatus] = useState('all')
+  const [filterTopic, setFilterTopic]   = useState('all')
   const [genContent, setGenContent] = useState(() => {
     try { return JSON.parse(localStorage.getItem('mmtc_genContent') ?? '{}') } catch { return {} }
   })
@@ -87,6 +111,27 @@ export default function PostListPanel({ onSelectSlot }) {
     a.date.localeCompare(b.date) || a.publish_hour - b.publish_hour
   )
 
+  const uniqueTopics = [...new Set(weeklySlots.map(s => s.topic_group).filter(Boolean))]
+
+  const filtered = sorted.filter(s => {
+    if (filterStatus !== 'all' && s.status !== filterStatus) return false
+    if (filterTopic  !== 'all' && s.topic_group !== filterTopic) return false
+    if (searchQ) {
+      const q = searchQ.toLowerCase()
+      if (!(s.topic_group || '').toLowerCase().includes(q) &&
+          !(s.direction?.hook || '').toLowerCase().includes(q) &&
+          !(s.direction?.content_angle || '').toLowerCase().includes(q) &&
+          !(s.notes || '').toLowerCase().includes(q)) return false
+    }
+    return true
+  })
+
+  const addManualPost = () => {
+    const slot = makeManualSlot()
+    setWeeklySlots(prev => [...prev, slot])
+    setExpandedId(slot.id)
+  }
+
   const updateSlot = (id, changes) =>
     setWeeklySlots(prev => prev.map(s => s.id === id ? { ...s, ...changes } : s))
 
@@ -103,43 +148,20 @@ export default function PostListPanel({ onSelectSlot }) {
   const genPost = useCallback(async (slot) => {
     setGenContent(prev => ({ ...prev, [slot.id]: { text: '', loading: true, error: null } }))
 
-    const d = slot.direction || {}
-    const FORMAT_VI = {
-      poll: 'Poll / Bình chọn', educational_post: 'Bài giáo dục tài chính',
-      market_update: 'Cập nhật thị trường', qa: 'Hỏi & Đáp',
-      service_faq: 'FAQ dịch vụ MoMo', minigame: 'Minigame / Tương tác',
-      confession_discussion: 'Thảo luận / Chia sẻ', promo_info: 'Thông tin ưu đãi',
-    }
-    const examples = (data?.posts ?? [])
+    const samplePosts = (data?.posts ?? [])
       .filter(p => !p.has_reward && p.post_content && p.er_user > 0)
-      .sort((a, b) => b.er_user - a.er_user).slice(0, 1)
-      .map(p => `"${p.post_content.slice(0, 120)}"`)
-      .join('')
-
-    const prompt = `Copywriter MaMa Tài Chính (MoMo) — tài chính cá nhân, tiếng Việt, 22–45 tuổi.
-${examples ? `Style mẫu: ${examples}\n` : ''}Định dạng: ${FORMAT_VI[slot.content_format] ?? slot.content_format} | Chủ đề: ${slot.topic_group}${d.hook ? ` | Hook: ${d.hook}` : ''}${d.cta ? ` | CTA: ${d.cta}` : ''}${d.content_angle ? ` | Góc: ${d.content_angle}` : ''}
-
-Viết 2 caption tiếng Việt (70–100 chữ/bản), KHÁC NHAU:
-Bản 1: hook số liệu/dữ kiện → nội dung → CTA
-Bản 2: hook câu hỏi/kể chuyện → nội dung → câu hỏi mở
-
-**Phiên bản 1:**
-
-**Phiên bản 2:**`
+      .sort((a, b) => b.er_user - a.er_user)
+      .slice(0, 5)
 
     try {
-      const res = await fetch('http://localhost:11434/api/chat', {
+      const res = await fetch('/api/gen-content', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'qwen2.5:1.5b',
-          stream: true,
-          messages: [{ role: 'user', content: prompt }],
-          options: { temperature: 0.85, num_predict: 350 },
-        }),
+        body: JSON.stringify({ slot, samplePosts }),
       })
       if (!res.ok) {
-        setGenContent(prev => ({ ...prev, [slot.id]: { text: '', loading: false, error: 'Ollama lỗi. Đảm bảo Ollama đang chạy.' } }))
+        const err = await res.json().catch(() => ({}))
+        setGenContent(prev => ({ ...prev, [slot.id]: { text: '', loading: false, error: err.error ?? 'Lỗi gen content' } }))
         return
       }
       const reader = res.body.getReader()
@@ -148,14 +170,16 @@ Bản 2: hook câu hỏi/kể chuyện → nội dung → câu hỏi mở
       while (true) {
         const { done, value } = await reader.read()
         if (done) break
-        const lines = decoder.decode(value, { stream: true }).split('\n').filter(Boolean)
+        const lines = decoder.decode(value, { stream: true }).split('\n').filter(l => l.startsWith('data: '))
         for (const line of lines) {
+          const raw = line.slice(6).trim()
+          if (raw === '[DONE]') break
           try {
-            const json = JSON.parse(line)
-            const token = json.message?.content ?? ''
-            if (token) {
-              accumulated += token
-              setGenContent(prev => ({ ...prev, [slot.id]: { text: accumulated, loading: false, error: null } }))
+            const { text, error } = JSON.parse(raw)
+            if (error) throw new Error(error)
+            if (text) {
+              accumulated += text
+              setGenContent(prev => ({ ...prev, [slot.id]: { text: accumulated, loading: true, error: null } }))
             }
           } catch {}
         }
@@ -169,7 +193,7 @@ Bản 2: hook câu hỏi/kể chuyện → nội dung → câu hỏi mở
       }
       setGenContent(prev => ({ ...prev, [slot.id]: { text: accumulated, loading: false, error: null } }))
     } catch (err) {
-      setGenContent(prev => ({ ...prev, [slot.id]: { text: '', loading: false, error: 'Không kết nối được Ollama (localhost:11434). Mở app Ollama rồi thử lại.' } }))
+      setGenContent(prev => ({ ...prev, [slot.id]: { text: '', loading: false, error: err.message } }))
     }
   }, [data])
 
@@ -196,13 +220,41 @@ Bản 2: hook câu hỏi/kể chuyện → nội dung → câu hỏi mở
 
   return (
     <div className={styles.panel}>
+      {/* Header row */}
       <div className={styles.panelHeader}>
         <span className={styles.panelTitle}>Danh sách bài trong tuần</span>
-        <span className={styles.panelCount}>{sorted.length} bài</span>
+        <span className={styles.panelCount}>{filtered.length}/{sorted.length} bài</span>
+        <button className={`btn btn-outline btn-sm ${styles.addManualBtn}`} onClick={addManualPost}>
+          <Plus size={13} /> Thêm thủ công
+        </button>
+      </div>
+
+      {/* Filter bar */}
+      <div className={styles.filterBar}>
+        <input
+          className={styles.searchInput}
+          placeholder="Tìm bài…"
+          value={searchQ}
+          onChange={e => setSearchQ(e.target.value)}
+        />
+        <select className={styles.filterSelect} value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
+          <option value="all">Tất cả trạng thái</option>
+          {STATUS_OPTS.map(s => <option key={s.val} value={s.val}>{s.label}</option>)}
+        </select>
+        <select className={styles.filterSelect} value={filterTopic} onChange={e => setFilterTopic(e.target.value)}>
+          <option value="all">Tất cả chủ đề</option>
+          {uniqueTopics.map(t => <option key={t} value={t}>{t}</option>)}
+        </select>
+        {(searchQ || filterStatus !== 'all' || filterTopic !== 'all') && (
+          <button className={styles.clearBtn}
+            onClick={() => { setSearchQ(''); setFilterStatus('all'); setFilterTopic('all') }}>
+            Xoá lọc
+          </button>
+        )}
       </div>
 
       <div className={styles.list}>
-        {sorted.map((slot, idx) => {
+        {filtered.map((slot, idx) => {
           const isOpen = expandedId === slot.id
           const d = slot.direction || {}
           const statusObj = STATUS_OPTS.find(s => s.val === slot.status) || STATUS_OPTS[0]
@@ -346,7 +398,8 @@ Bản 2: hook câu hỏi/kể chuyện → nội dung → câu hỏi mở
                         </button>
                         <button className={`btn btn-sm ${styles.genBtn}`}
                           onClick={() => genPost(slot)}
-                          disabled={genContent[slot.id]?.loading}>
+                          disabled={genContent[slot.id]?.loading || slot.locked}
+                          title={slot.locked ? 'Bài đang khoá — mở khoá để tạo lại content' : ''}>
                           {genContent[slot.id]?.loading
                             ? <><Loader size={13} className={styles.spin} /> Đang tạo…</>
                             : <><Sparkles size={13} /> Tạo content</>}

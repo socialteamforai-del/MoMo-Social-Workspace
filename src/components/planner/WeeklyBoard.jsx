@@ -1,5 +1,5 @@
-import React from 'react'
-import { ChevronLeft, ChevronRight, RefreshCw, Plus, Zap, Calendar } from 'lucide-react'
+import React, { useState } from 'react'
+import { ChevronLeft, ChevronRight, Plus } from 'lucide-react'
 import { useApp } from '../../context/AppContext.jsx'
 import { generateWeeklyCalendar, injectTrendPost, getWeekStart, formatDate } from '../../utils/calendarGen.js'
 import SlotCard from './SlotCard.jsx'
@@ -21,37 +21,71 @@ function weekLabel(weekStart) {
   return `${fmt(weekStart)} – ${fmt(end)}/${end.getFullYear()}`
 }
 
-export default function WeeklyBoard({ onSelectSlot }) {
+export default function WeeklyBoard({ onSelectSlot, onGenerate }) {
   const {
     selectedWeek, setSelectedWeek,
     weeklySlots, setWeeklySlots,
     pageConfig, data, plannerInputs,
+    plannerSubmitted, submittedInputs,
   } = useApp()
+
+  const [draggingId, setDraggingId]   = useState(null)
+  const [dragOverKey, setDragOverKey] = useState(null)
+
+  const handleCardClick = (slot) => {
+    if (draggingId) return
+    onSelectSlot(slot)
+  }
 
   const prevWeek = () => setSelectedWeek(d => addDays(d, -7))
   const nextWeek = () => setSelectedWeek(d => addDays(d, 7))
   const toToday  = () => setSelectedWeek(getWeekStart(new Date()))
 
-  const buInputsArr = plannerInputs.buInputs?.event_name ? [plannerInputs.buInputs] : []
+  // Map confirmed events from submittedInputs to calendarGen buInputs format
+  const buInputsArr = (submittedInputs?.events ?? [])
+    .filter(e => e.name?.trim() || e.date)
+    .map(e => ({
+      event_name:        e.name?.trim() || '',
+      must_publish_date: e.date || null,
+      cta:               e.cta        || '',
+      mechanic:          e.mechanic   || '',
+      reward:            e.reward     || '',
+      keyMessage:        e.keyMessage || '',
+      stats:             e.stats      || '',
+    }))
+
+  // Merge helper: add generated slots only where no existing slot occupies the same date+hour.
+  // Always preserve existing slots (past, saved, draft with content, scheduled, locked).
+  const mergeSlots = (existing, generated) => {
+    const occupiedKeys = new Set(existing.map(s => `${s.date}|${s.publish_hour}`))
+    const toAdd = generated.filter(s =>
+      s.date >= todayStr &&                          // only future/today
+      !occupiedKeys.has(`${s.date}|${s.publish_hour}`) // don't overwrite existing
+    )
+    return [...existing, ...toAdd].sort((a, b) =>
+      a.date.localeCompare(b.date) || a.publish_hour - b.publish_hour
+    )
+  }
 
   const generate = () => {
-    const slots = generateWeeklyCalendar(pageConfig, {
+    if (!plannerSubmitted) return
+    const generated = generateWeeklyCalendar(pageConfig, {
       weekStart: selectedWeek,
       numPosts: plannerInputs.numPosts,
       mode: plannerInputs.mode,
       buInputs: buInputsArr,
     }, { posts: data.posts, timingBenchmarks: data.timingBenchmarks, trends: data.marketTrends })
-    setWeeklySlots(slots)
+    setWeeklySlots(prev => mergeSlots(prev, generated))
   }
 
   const refreshFlexible = () => {
     setWeeklySlots(prev => {
-      const fixed = prev.filter(s => s.slot_type === 'fixed')
+      const keep = prev.filter(s => s.locked || s.slot_type === 'fixed' || s.status !== 'draft' || s.caption?.trim())
       const fresh = generateWeeklyCalendar(pageConfig, {
         weekStart: selectedWeek, numPosts: plannerInputs.numPosts, mode: plannerInputs.mode, buInputs: [],
       }, { posts: data.posts, timingBenchmarks: data.timingBenchmarks, trends: data.marketTrends })
         .filter(s => s.slot_type !== 'fixed')
-      return [...fixed, ...fresh].sort((a, b) => a.date.localeCompare(b.date))
+      return mergeSlots(keep, fresh)
     })
   }
 
@@ -59,6 +93,20 @@ export default function WeeklyBoard({ onSelectSlot }) {
     const trend = data.marketTrends.find(t => t.status === 'active')
     if (!trend || !weeklySlots.length) return
     setWeeklySlots(prev => injectTrendPost(prev, trend, pageConfig))
+  }
+
+  // Drag handlers
+  const handleDrop = (day, hour) => {
+    if (!draggingId) return
+    const draggedSlot = weeklySlots.find(s => s.id === draggingId)
+    if (draggedSlot?.locked) { setDraggingId(null); setDragOverKey(null); return }
+    setWeeklySlots(prev => prev.map(s =>
+      s.id === draggingId
+        ? { ...s, day_of_week: day, publish_hour: hour, date: dayDates[day].date }
+        : s
+    ))
+    setDraggingId(null)
+    setDragOverKey(null)
   }
 
   // Build lookup: day+hour → slots[]
@@ -71,10 +119,18 @@ export default function WeeklyBoard({ onSelectSlot }) {
   }
 
   // Build day dates for header
+  const todayStr = formatDate(new Date())
   const dayDates = {}
   DAYS.forEach((day, i) => {
     const d = addDays(selectedWeek, i)
-    dayDates[day] = { date: formatDate(d), day: d.getDate(), month: d.getMonth() + 1 }
+    const dateStr = formatDate(d)
+    dayDates[day] = {
+      date:    dateStr,
+      day:     d.getDate(),
+      month:   d.getMonth() + 1,
+      isToday: dateStr === todayStr,
+      isPast:  dateStr < todayStr,
+    }
   })
 
   return (
@@ -89,20 +145,15 @@ export default function WeeklyBoard({ onSelectSlot }) {
         </div>
 
         <div className={styles.actions}>
-          <button className="btn btn-primary btn-sm" onClick={generate}>
-            <Calendar size={14} /> Tạo lịch tuần
-          </button>
-          <button className="btn btn-outline btn-sm" onClick={refreshFlexible} disabled={!weeklySlots.length}>
-            <RefreshCw size={14} /> Làm mới flexible
-          </button>
-          <button className="btn btn-outline btn-sm" onClick={injectTrend} disabled={!weeklySlots.length}>
-            <Zap size={14} /> Chèn trend
-          </button>
-          <button className="btn btn-ghost btn-sm" onClick={() => onSelectSlot({ isNew: true })}>
-            <Plus size={14} /> Tạo mới
-          </button>
+<button className="btn btn-ghost btn-sm" onClick={() => {
+              const firstFuture = DAYS.find(d => !dayDates[d].isPast) || DAYS[0]
+              onSelectSlot({ isNew: true, prefill: { day_of_week: firstFuture, date: dayDates[firstFuture].date, publish_hour: 12 } })
+            }}>
+              <Plus size={14} /> Tạo mới
+            </button>
         </div>
       </div>
+
 
       {/* Grid */}
       <div className={styles.gridWrapper}>
@@ -110,12 +161,15 @@ export default function WeeklyBoard({ onSelectSlot }) {
           <thead>
             <tr>
               <th className={styles.cornerCell} />
-              {DAYS.map(day => (
-                <th key={day} className={styles.dayHead}>
-                  <span className={styles.dayName}>{DAYS_VI[day]}</span>
-                  <span className={styles.dayDate}>{dayDates[day].day}/{dayDates[day].month}</span>
-                </th>
-              ))}
+              {DAYS.map(day => {
+                const { day: d, month: m, isToday, isPast } = dayDates[day]
+                return (
+                  <th key={day} className={`${styles.dayHead} ${isToday ? styles.dayHeadToday : ''} ${isPast ? styles.dayHeadPast : ''}`}>
+                    <span className={styles.dayName}>{DAYS_VI[day]}</span>
+                    <span className={`${styles.dayDate} ${isToday ? styles.dayDateToday : ''}`}>{d}/{m}</span>
+                  </th>
+                )
+              })}
             </tr>
           </thead>
           <tbody>
@@ -125,14 +179,28 @@ export default function WeeklyBoard({ onSelectSlot }) {
                 {DAYS.map(day => {
                   const key    = `${day}-${hour}`
                   const slots  = slotMap[key] || []
-                  const isGen  = weeklySlots.length > 0
+                  const isOver = dragOverKey === key
+                  const isPast = dayDates[day].isPast
 
                   return (
-                    <td key={day} className={styles.slotCell}>
+                    <td
+                      key={day}
+                      className={`${styles.slotCell} ${isOver ? styles.slotCellOver : ''} ${isPast && slots.length === 0 ? styles.slotCellPast : ''}`}
+                      onDragOver={e => { e.preventDefault(); setDragOverKey(key) }}
+                      onDragLeave={() => setDragOverKey(null)}
+                      onDrop={() => handleDrop(day, hour)}
+                    >
                       {slots.map(slot => (
-                        <SlotCard key={slot.id} slot={slot} onClick={() => onSelectSlot(slot)} />
+                        <SlotCard
+                          key={slot.id}
+                          slot={slot}
+                          onClick={() => handleCardClick(slot)}
+                          dragging={draggingId === slot.id}
+                          onDragStart={() => setDraggingId(slot.id)}
+                          onDragEnd={() => { setDraggingId(null); setDragOverKey(null) }}
+                        />
                       ))}
-                      {slots.length === 0 && (
+                      {slots.length === 0 && !isPast && (
                         <button
                           className={styles.addBtn}
                           onClick={() => onSelectSlot({ isNew: true, prefill: { day_of_week: day, publish_hour: hour, date: dayDates[day].date } })}
@@ -149,7 +217,7 @@ export default function WeeklyBoard({ onSelectSlot }) {
         </table>
       </div>
 
-      {weeklySlots.length === 0 && (
+      {weeklySlots.length === 0 && plannerSubmitted && (
         <div className={styles.empty}>
           Chưa có lịch. Nhấn <strong>"Tạo lịch tuần"</strong> để bắt đầu.
         </div>

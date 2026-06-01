@@ -1,0 +1,350 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* ── Mode tabs ── */
+.modeTabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-secondary, #f4f4f5);
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.modeTab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 6px 8px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary, #6b7280);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.modeTab:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary, #111827);
+}
+
+.modeTabActive {
+  background: #fff;
+  color: var(--text-primary, #111827);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Drop zone (upload mode) ── */
+.dropZone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 16px;
+  border: 1.5px dashed var(--border-color, #e5e7eb);
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: var(--text-secondary, #6b7280);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  background: transparent;
+}
+
+.dropZone:hover {
+  border-color: var(--primary, #A50064);
+  background: rgba(165, 0, 100, 0.03);
+}
+
+.dropZoneActive {
+  border-color: var(--primary, #A50064);
+  background: rgba(165, 0, 100, 0.06);
+  color: var(--primary, #A50064);
+}
+
+/* ── Template panel ── */
+.templatePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary, #6b7280);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.twoCol {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* ── File picker ── */
+.filePicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.filePickerItem {
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 2px;
+  background: var(--bg-secondary, #f4f4f5);
+  cursor: pointer;
+  transition: border-color 0.15s;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.filePickerItem:hover {
+  border-color: var(--border-color, #d1d5db);
+}
+
+.filePickerItemActive {
+  border-color: var(--primary, #A50064);
+}
+
+.filePickerImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 3px;
+}
+
+/* ── Photo zone ── */
+.photoZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100px;
+  height: 100px;
+  border: 1.5px dashed var(--border-color, #e5e7eb);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--text-secondary, #6b7280);
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+
+.photoZone:hover {
+  border-color: var(--primary, #A50064);
+}
+
+.photoPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ── Preview box ── */
+.preview {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--bg-secondary, #f4f4f5);
+  background-size: cover;
+  background-position: center;
+  border: 1px solid var(--border-color, #e5e7eb);
+  flex-shrink: 0;
+}
+
+.previewPhoto {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+/* Frame overlay — sits on top of the photo, transparent center shows photo through */
+.previewFrame {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.previewElement {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  height: 50%;
+  width: auto;
+  object-fit: contain;
+}
+
+.previewBadge {
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+  max-width: 70px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.previewHeadline {
+  position: absolute;
+  top: 28px;
+  left: 7px;
+  right: 40px;
+  margin: 0;
+  font-size: 9px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.previewCta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 4px 7px;
+  font-size: 9px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.previewEmpty {
+  font-size: 11px;
+  color: var(--text-tertiary, #9ca3af);
+}
+
+/* ── Edit fields ── */
+.editFields {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.editRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.editKey {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary, #6b7280);
+  width: 44px;
+  flex-shrink: 0;
+}
+
+.editInput {
+  flex: 1;
+  font-size: 12px;
+  padding: 4px 7px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 5px;
+  background: var(--bg-primary, #fff);
+  color: var(--text-primary, #111827);
+  min-width: 0;
+}
+
+.editInput:focus {
+  outline: none;
+  border-color: var(--primary, #A50064);
+}
+
+.colorPicker {
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  background: none;
+}
+
+/* ── Buttons ── */
+.captureBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  border: none;
+  border-radius: 7px;
+  background: var(--primary, #A50064);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  align-self: flex-end;
+}
+
+.captureBtn:hover:not(:disabled) { opacity: 0.88; }
+.captureBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.clearBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-secondary, #6b7280);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.clearBtn:hover { color: var(--danger, #ef4444); }
+
+/* ── Loading ── */
+.loadingRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--text-secondary, #6b7280);
+  padding: 10px 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}

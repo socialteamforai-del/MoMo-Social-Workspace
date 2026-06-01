@@ -1,0 +1,173 @@
+
+> momo-social-workspace@0.1.0 dev
+> node server.js & vite --port 5173
+
+Serving frontend from dist/
+MoMo proxy: http://localhost:3001 (cache TTL 5m)
+
+  [32m[1mVITE[22m v6.4.2[39m  [2mready in [0m[1m1966[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://10.40.38.33:[1m5173[22m/[39m
+[2m12:09:17 AM[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: C:\Users\my.doan1\AI\MoMo-Social-Workspace\src\components\planner\SlotDetailDrawer.jsx: Identifier 'pageConfig' has already been declared. (309:8)
+
+[0m [90m 307 |[39m   [36mconst[39m [showInGroupIds[33m,[39m   setShowInGroupIds]   [33m=[39m useState(slot[33m.[39mshowInGroupIds   [33m?[39m[33m?[39m [])
+ [90m 308 |[39m
+[31m[1m>[22m[39m[90m 309 |[39m   [36mconst[39m pageConfig   [33m=[39m [33mPAGE_CONFIGS[39m[slot[33m.[39mpage_id] [33m?[39m[33m?[39m [33mPAGE_CONFIGS[39m[[33mDEFAULT_PAGE_ID[39m]
+ [90m     |[39m         [31m[1m^[22m[39m
+ [90m 310 |[39m   [36mconst[39m communities  [33m=[39m pageConfig[33m.[39mcommunities [33m?[39m[33m?[39m []
+ [90m 311 |[39m
+ [90m 312 |[39m   [36mconst[39m toggleGroup [33m=[39m (id) [33m=>[39m setShowInGroupIds(prev [33m=>[39m[0m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mC:/Users/my.doan1/AI/MoMo-Social-Workspace/src/components/planner/SlotDetailDrawer.jsx[39m:309:8
+[33m  307|    const [showInGroupIds,   setShowInGroupIds]   = useState(slot.showInGroupIds   ?? [])
+  308|  
+  309|    const pageConfig   = PAGE_CONFIGS[slot.page_id] ?? PAGE_CONFIGS[DEFAULT_PAGE_ID]
+     |          ^
+  310|    const communities  = pageConfig.communities ?? []
+  311|  [39m
+[2m12:09:18 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: C:\Users\my.doan1\AI\MoMo-Social-Workspace\src\components\planner\SlotDetailDrawer.jsx: Identifier 'pageConfig' has already been declared. (309:8)
+
+[0m [90m 307 |[31m   [36mconst[31m [showInGroupIds[33m,[31m   setShowInGroupIds]   [33m=[31m useState(slot[33m.[31mshowInGroupIds   [33m?[31m[33m?[31m [])
+ [90m 308 |[31m
+[31m[1m>[22m[31m[90m 309 |[31m   [36mconst[31m pageConfig   [33m=[31m [33mPAGE_CONFIGS[31m[slot[33m.[31mpage_id] [33m?[31m[33m?[31m [33mPAGE_CONFIGS[31m[[33mDEFAULT_PAGE_ID[31m]
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 310 |[31m   [36mconst[31m communities  [33m=[31m pageConfig[33m.[31mcommunities [33m?[31m[33m?[31m []
+ [90m 311 |[31m
+ [90m 312 |[31m   [36mconst[31m toggleGroup [33m=[31m (id) [33m=>[31m setShowInGroupIds(prev [33m=>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mC:/Users/my.doan1/AI/MoMo-Social-Workspace/src/components/planner/SlotDetailDrawer.jsx[39m:309:8
+[33m  307|    const [showInGroupIds,   setShowInGroupIds]   = useState(slot.showInGroupIds   ?? [])
+  308|  
+  309|    const pageConfig   = PAGE_CONFIGS[slot.page_id] ?? PAGE_CONFIGS[DEFAULT_PAGE_ID]
+     |          ^
+  310|    const communities  = pageConfig.communities ?? []
+  311|  [39m
+      at constructor (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:365:19)
+      at JSXParserMixin.raise (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:6599:19)
+      at ScopeHandler.checkRedeclarationInScope (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:1619:19)
+      at ScopeHandler.declareName (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:1585:12)
+      at JSXParserMixin.declareNameFromIdentifier (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:7567:16)
+      at JSXParserMixin.checkIdentifier (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:7563:12)
+      at JSXParserMixin.checkLVal (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:7500:12)
+      at JSXParserMixin.parseVarId (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13412:10)
+      at JSXParserMixin.parseVar (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13383:12)
+      at JSXParserMixin.parseVarStatement (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13230:10)
+      at JSXParserMixin.parseStatementContent (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12851:23)
+      at JSXParserMixin.parseStatementLike (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12767:17)
+      at JSXParserMixin.parseStatementListItem (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12747:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13316:61)
+      at JSXParserMixin.parseBlockBody (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13309:10)
+      at JSXParserMixin.parseBlock (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13297:10)
+      at JSXParserMixin.parseFunctionBody (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12100:24)
+      at JSXParserMixin.parseFunctionBodyAndFinish (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12086:10)
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13445:12
+      at JSXParserMixin.withSmartMixTopicForbiddingContext (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12403:14)
+      at JSXParserMixin.parseFunction (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13444:10)
+      at JSXParserMixin.parseExportDefaultExpression (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13907:19)
+      at JSXParserMixin.parseExport (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13828:25)
+      at JSXParserMixin.parseStatementContent (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12878:27)
+      at JSXParserMixin.parseStatementLike (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12767:17)
+      at JSXParserMixin.parseModuleItem (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12744:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13316:36)
+      at JSXParserMixin.parseBlockBody (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13309:10)
+      at JSXParserMixin.parseProgram (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12622:10)
+      at JSXParserMixin.parseTopLevel (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12612:25)
+      at JSXParserMixin.parse (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:14488:25)
+      at parse (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:14522:38)
+      at parser (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\core\lib\transformation\normalize-file.js:64:37)
+      at normalizeFile.next (<anonymous>)
+      at run (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\core\lib\transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:261:32)
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:273:13
+      at async.call.result.err.err (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:223:11)
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:189:28
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\core\lib\gensync-utils\async.js:67:7
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:113:33
+      at step (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:287:14)
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:273:13
+      at async.call.result.err.err (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:223:11)
+[2m12:09:25 AM[22m [31m[1m[vite][22m[39m [31mInternal server error: C:\Users\my.doan1\AI\MoMo-Social-Workspace\src\components\planner\SlotDetailDrawer.jsx: Identifier 'pageConfig' has already been declared. (309:8)
+
+[0m [90m 307 |[31m   [36mconst[31m [showInGroupIds[33m,[31m   setShowInGroupIds]   [33m=[31m useState(slot[33m.[31mshowInGroupIds   [33m?[31m[33m?[31m [])
+ [90m 308 |[31m
+[31m[1m>[22m[31m[90m 309 |[31m   [36mconst[31m pageConfig   [33m=[31m [33mPAGE_CONFIGS[31m[slot[33m.[31mpage_id] [33m?[31m[33m?[31m [33mPAGE_CONFIGS[31m[[33mDEFAULT_PAGE_ID[31m]
+ [90m     |[31m         [31m[1m^[22m[31m
+ [90m 310 |[31m   [36mconst[31m communities  [33m=[31m pageConfig[33m.[31mcommunities [33m?[31m[33m?[31m []
+ [90m 311 |[31m
+ [90m 312 |[31m   [36mconst[31m toggleGroup [33m=[31m (id) [33m=>[31m setShowInGroupIds(prev [33m=>[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mC:/Users/my.doan1/AI/MoMo-Social-Workspace/src/components/planner/SlotDetailDrawer.jsx[39m:309:8
+[33m  307|    const [showInGroupIds,   setShowInGroupIds]   = useState(slot.showInGroupIds   ?? [])
+  308|  
+  309|    const pageConfig   = PAGE_CONFIGS[slot.page_id] ?? PAGE_CONFIGS[DEFAULT_PAGE_ID]
+     |          ^
+  310|    const communities  = pageConfig.communities ?? []
+  311|  [39m
+      at constructor (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:365:19)
+      at JSXParserMixin.raise (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:6599:19)
+      at ScopeHandler.checkRedeclarationInScope (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:1619:19)
+      at ScopeHandler.declareName (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:1585:12)
+      at JSXParserMixin.declareNameFromIdentifier (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:7567:16)
+      at JSXParserMixin.checkIdentifier (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:7563:12)
+      at JSXParserMixin.checkLVal (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:7500:12)
+      at JSXParserMixin.parseVarId (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13412:10)
+      at JSXParserMixin.parseVar (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13383:12)
+      at JSXParserMixin.parseVarStatement (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13230:10)
+      at JSXParserMixin.parseStatementContent (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12851:23)
+      at JSXParserMixin.parseStatementLike (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12767:17)
+      at JSXParserMixin.parseStatementListItem (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12747:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13316:61)
+      at JSXParserMixin.parseBlockBody (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13309:10)
+      at JSXParserMixin.parseBlock (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13297:10)
+      at JSXParserMixin.parseFunctionBody (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12100:24)
+      at JSXParserMixin.parseFunctionBodyAndFinish (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12086:10)
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13445:12
+      at JSXParserMixin.withSmartMixTopicForbiddingContext (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12403:14)
+      at JSXParserMixin.parseFunction (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13444:10)
+      at JSXParserMixin.parseExportDefaultExpression (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13907:19)
+      at JSXParserMixin.parseExport (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13828:25)
+      at JSXParserMixin.parseStatementContent (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12878:27)
+      at JSXParserMixin.parseStatementLike (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12767:17)
+      at JSXParserMixin.parseModuleItem (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12744:17)
+      at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13316:36)
+      at JSXParserMixin.parseBlockBody (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:13309:10)
+      at JSXParserMixin.parseProgram (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12622:10)
+      at JSXParserMixin.parseTopLevel (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:12612:25)
+      at JSXParserMixin.parse (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:14488:25)
+      at parse (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\parser\lib\index.js:14522:38)
+      at parser (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\core\lib\transformation\normalize-file.js:64:37)
+      at normalizeFile.next (<anonymous>)
+      at run (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+      at transform (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\core\lib\transform.js:22:33)
+      at transform.next (<anonymous>)
+      at step (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:261:32)
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:273:13
+      at async.call.result.err.err (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:223:11)
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:189:28
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\@babel\core\lib\gensync-utils\async.js:67:7
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:113:33
+      at step (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:287:14)
+      at C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:273:13
+      at async.call.result.err.err (C:\Users\my.doan1\AI\MoMo-Social-Workspace\node_modules\gensync\index.js:223:11)
+[2m12:11:05 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/context/AuthContext.jsx[22m
+[2m12:16:32 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/planner/SlotDetailDrawer.jsx[22m
+[2m12:27:02 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/planner/SlotDetailDrawer.jsx[22m
+[2m12:27:10 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/planner/SlotDetailDrawer.jsx[22m
+[2m12:27:31 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/planner/SlotDetailDrawer.jsx[22m
+[2m12:27:42 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/planner/SlotDetailDrawer.jsx[22m
+[2m12:27:52 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/planner/SlotDetailDrawer.jsx[22m
+[2m12:27:58 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/planner/SlotDetailDrawer.jsx[22m
+[2m12:28:07 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/context/AppContext.jsx[22m
+[2m12:28:07 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/context/AppContext.jsx[22m Could not Fast Refresh ("useApp" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m12:28:07 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/App.jsx, /src/components/layout/Layout.jsx, /src/components/layout/Topbar.jsx, /src/components/layout/Sidebar.jsx, /src/components/overview/OverviewTab.jsx, /src/components/library/LibraryTab.jsx, /src/components/planner/PlannerTab.jsx, /src/components/overview/FormatPerformance.jsx, /src/components/overview/DataWarnings.jsx, /src/components/overview/TimingHeatmap.jsx, /src/components/planner/SignalSummary.jsx, /src/components/planner/WeeklyBoard.jsx, /src/components/overview/TopicBreakdown.jsx, /src/components/overview/KPICards.jsx, /src/components/overview/TopPosts.jsx, /src/components/planner/InputPanel.jsx, /src/components/settings/DataUpload.jsx, /src/components/settings/BenchmarkConfig.jsx, /src/components/settings/PageManager.jsx, /src/components/settings/TaxonomyEditor.jsx, /src/components/settings/ApprovedContent.jsx, /src/components/settings/VisualAssets.jsx, /src/components/settings/CharacterProfile.jsx, /src/components/overview/DataSourceSelector.jsx, /src/components/planner/TrendManager.jsx, /src/components/momodata/MomoDataTab.jsx, /src/components/planner/SlotDetailDrawer.jsx[22m
+[2m12:28:08 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [33mhmr invalidate [39m[2m/src/components/momodata/MomoDataTab.jsx[22m Could not Fast Refresh ("getMomoDataCache" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+[2m12:28:08 AM[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/overview/DataSourceSelector.jsx[22m

@@ -54,6 +54,10 @@
   text-align: center;
 }
 
+.dayHeadPast { opacity: 0.45; }
+
+.dayHeadToday .dayName { color: var(--momo-pink); }
+
 .dayName {
   display: block;
   font-size: var(--text-xs);
@@ -68,6 +72,20 @@
   font-size: 11px;
   color: var(--gray-400);
   margin-top: 1px;
+}
+
+.dayDateToday {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--momo-pink);
+  color: #fff;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 11px;
+  margin-top: 2px;
 }
 
 .hourCell {
@@ -87,6 +105,23 @@
   border-bottom: 1px solid var(--gray-100);
   border-right: 1px solid var(--gray-100);
   min-height: 70px;
+  transition: background 0.1s;
+}
+
+.slotCellOver {
+  background: var(--pink-50);
+  outline: 2px dashed var(--momo-pink);
+  outline-offset: -2px;
+}
+
+.slotCellPast {
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 4px,
+    rgba(0,0,0,0.018) 4px,
+    rgba(0,0,0,0.018) 8px
+  );
 }
 
 .addBtn {
@@ -122,3 +157,21 @@
   color: var(--gray-400);
   font-size: var(--text-sm);
 }
+
+/* ── Submit gate banner ── */
+.gateBanner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 9px var(--space-4);
+  background: #fffbeb;
+  border-bottom: 1px solid #fde68a;
+  font-size: var(--text-xs);
+  color: #92400e;
+}
+
+.btnGated { opacity: 0.55; }
+
+/* ── Drag cursor ── */
+.gridWrapper [draggable] { cursor: grab; }
+.gridWrapper [draggable]:active { cursor: grabbing; }

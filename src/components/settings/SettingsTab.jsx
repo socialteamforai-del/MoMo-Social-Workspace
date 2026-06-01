@@ -3,9 +3,15 @@ import BenchmarkConfig from './BenchmarkConfig.jsx'
 import TaxonomyEditor from './TaxonomyEditor.jsx'
 import PageManager from './PageManager.jsx'
 import DataUpload from './DataUpload.jsx'
+import CharacterProfile from './CharacterProfile.jsx'
+import ApprovedContent from './ApprovedContent.jsx'
+import VisualAssets from './VisualAssets.jsx'
 import styles from './SettingsTab.module.css'
 
 const SECTIONS = [
+  { id: 'character',  label: 'Phong cách trang' },
+  { id: 'approved',   label: 'Caption đã duyệt' },
+  { id: 'visual',     label: 'Visual Assets' },
   { id: 'benchmarks', label: 'Ngưỡng benchmark' },
   { id: 'taxonomy',   label: 'Taxonomy' },
   { id: 'pages',      label: 'Quản lý page' },
@@ -13,7 +19,7 @@ const SECTIONS = [
 ]
 
 export default function SettingsTab() {
-  const [active, setActive] = useState('benchmarks')
+  const [active, setActive] = useState('character')
 
   return (
     <div className={styles.container}>
@@ -35,6 +41,9 @@ export default function SettingsTab() {
         </nav>
 
         <div className={styles.content}>
+          {active === 'character'  && <CharacterProfile />}
+          {active === 'approved'   && <ApprovedContent />}
+          {active === 'visual'     && <VisualAssets />}
           {active === 'benchmarks' && <BenchmarkConfig />}
           {active === 'taxonomy'   && <TaxonomyEditor />}
           {active === 'pages'      && <PageManager />}

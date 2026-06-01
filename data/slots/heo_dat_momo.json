@@ -1,0 +1,69 @@
+[
+  {
+    "id": "heo_dat_momo_2026-06-02_minigame_quiz_h0",
+    "page_id": "heo_dat_momo",
+    "date": "2026-06-02",
+    "day_of_week": "Tuesday",
+    "day_vi": "Thứ Ba",
+    "publish_hour": 12,
+    "slot_type": "flexible",
+    "status": "scheduled",
+    "topic_group": "Minigame & Đố vui rinh lộc",
+    "content_format": "minigame_quiz",
+    "objective": "education",
+    "priority_score": 0.43,
+    "confidence": {
+      "label": "Thấp",
+      "color": "red"
+    },
+    "score_components": {
+      "historical": 0.4,
+      "userDemand": 0.4,
+      "trend": 0,
+      "buPriority": 0,
+      "timingFit": 0.5
+    },
+    "direction": {
+      "hook": "Minigame & Đố vui rinh lộc: góc nhìn minigame_quiz cho cộng đồng",
+      "content_angle": "Góc content tối ưu cho Minigame & Đố vui rinh lộc dạng minigame_quiz",
+      "angle_basis": "Angle dựa trên topic taxonomy + dữ liệu lịch sử",
+      "cta": "Tham gia ngay và rinh lộc về nhà! 🎁",
+      "caption_direction": "Giọng văn: thân thiện, gần gũi, không quá formal. Độ dài: 100–150 chữ. Cấu trúc: Hook → Context ngắn → CTA rõ ràng. Kết thúc bằng câu hỏi mở.",
+      "visual_direction": "Nền cam/vàng ấm pastel. Nhân vật Heo Đất tư thế vui nhộn cầm câu hỏi, confetti xung quanh. Badge label cam (#FF6B35) góc trên trái. CTA bar cam đậm phía dưới. Không có chữ.",
+      "has_reward_note": "",
+      "similar_post_ref": null,
+      "basis": {
+        "performance": "Format theo pillar mix mặc định",
+        "trend": null,
+        "trend_topic": null,
+        "trend_source": null,
+        "timing": null,
+        "bu": null
+      }
+    },
+    "bu_campaign": null,
+    "locked": false,
+    "fallback_idea": {
+      "topic_group": "Minigame & Đố vui rinh lộc",
+      "content_format": "gamified_reward",
+      "note": "Nếu không có nội dung cho minigame_quiz, thay bằng gamified_reward cùng topic"
+    },
+    "notes": "",
+    "title": "",
+    "publish_time": "12:00",
+    "caption": "🎁🧧 MINIGAME ĐỐ VUI RINH LỘC: CƠ HỘI NHẬN QUÀ CỰC ĐÃ TỪ HEO ĐẤT 🐷💛\n\nCả nhà mình ơi, đã sẵn sàng thử sức với minigame siêu thú vị này chưa nè? Không chỉ có cơ hội kiểm tra độ nhanh nhạy, mà còn rinh ngay quà siêu đã từ Heo Đất nữa đó 🎁\n\n👉 Câu hỏi của chúng ta hôm nay: \"Loài hoa nào chỉ nở vào ban đêm?\" 🌙\n\nĐể tham gia, cả nhà comment theo cú pháp: [Đáp án] + [Số may mắn từ 1-9999] nha!\n\n🎉 Sẽ có 10 chủ trại may mắn nhất nhận quà siêu hấp dẫn từ Heo!\n\n⏰ Hạn chót tham gia: 10/06/2026.\n📢 Công bố kết quả vào: 12/06/2026.\n\nTham gia ngay và rinh lộc về nhà! Các chủ trại đã chuẩn bị tinh thần chưa nè? 🌟",
+    "imageUrls": [],
+    "ctaConfig": {
+      "enabled": false,
+      "ctaType": 1,
+      "ctaLabel": "",
+      "url": ""
+    },
+    "scheduleEnabled": false,
+    "showInMainGroup": true,
+    "showInGroupIds": [],
+    "postId": 116676039411424,
+    "published_by": "My Doan",
+    "published_at": 1780335082478
+  }
+]
