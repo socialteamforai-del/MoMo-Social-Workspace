@@ -1473,4 +1473,5 @@ if (fs.existsSync(distPath)) {
   console.log('Serving frontend from dist/')
 }
 
-app.listen(3001, () => console.log('MoMo proxy: http://localhost:3001 (cache TTL 5m)'))
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => console.log(`MoMo proxy: http://localhost:${PORT} (cache TTL 5m)`))
