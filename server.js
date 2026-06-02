@@ -14,6 +14,7 @@ try {
 import express from 'express'
 import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 import OpenAI from 'openai'
 import { PDFParse } from 'pdf-parse'
 import { PAGE_CONFIGS, DEFAULT_PAGE_ID } from './src/config/pages.js'
@@ -23,7 +24,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
 const app = express()
 app.use(express.json({ limit: '20mb' }))
 // Serve public/ folder (elements, post-images, data) for both dev and prod
-app.use(express.static(path.join(path.dirname(new URL(import.meta.url).pathname.slice(1)), 'public')))
+app.use(express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), 'public')))
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
@@ -33,7 +34,7 @@ app.use((req, res, next) => {
 })
 
 // ── Path helpers ──────────────────────────────────────────────────────────────
-const ROOT_DIR       = path.dirname(new URL(import.meta.url).pathname.slice(1))
+const ROOT_DIR       = path.dirname(fileURLToPath(import.meta.url))
 const DATA_DIR       = path.join(ROOT_DIR, 'data')
 const CHARACTERS_DIR = path.join(DATA_DIR, 'characters')
 const APPROVED_DIR   = path.join(DATA_DIR, 'approved')
