@@ -57,16 +57,31 @@ const DATASOURCE_ID  = '3c0ba297-ea18-429e-9225-6980d7f21463'
 const CACHE_TTL_MS   = 5 * 60 * 1000
 const cache          = new Map()
 
-function readTokens() { return JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf-8')) }
-function saveTokens(t) { fs.writeFileSync(TOKEN_PATH, JSON.stringify(t, null, 2)) }
+// In-memory token store (fallback when no local file — e.g. Render)
+let memTokens = process.env.MCP_REFRESH_TOKEN ? {
+  access_token:  process.env.MCP_ACCESS_TOKEN  || '',
+  refresh_token: process.env.MCP_REFRESH_TOKEN || '',
+} : null
+const MCP_CLIENT_ID = process.env.MCP_CLIENT_ID || null
+
+function readTokens() {
+  if (memTokens) return memTokens
+  return JSON.parse(fs.readFileSync(TOKEN_PATH, 'utf-8'))
+}
+
+function saveTokens(t) {
+  if (memTokens) { memTokens = { ...memTokens, ...t }; return }
+  try { fs.writeFileSync(TOKEN_PATH, JSON.stringify(t, null, 2)) } catch {}
+}
 
 async function refreshToken() {
   const tokens = readTokens()
-  const client = JSON.parse(fs.readFileSync(CLIENT_PATH, 'utf-8'))
+  const clientId = MCP_CLIENT_ID ||
+    JSON.parse(fs.readFileSync(CLIENT_PATH, 'utf-8')).client_id
   const body = new URLSearchParams({
     grant_type: 'refresh_token',
     refresh_token: tokens.refresh_token,
-    client_id: client.client_id,
+    client_id: clientId,
   })
   const res = await fetch(TOKEN_ENDPOINT, {
     method: 'POST',
